@@ -1,10 +1,11 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
+import MerchantNavbar from "./MerchantNavbar";
 
 const MerchantPage = () => {
   return (
     <div>
-      <h1>Welcome, Merchant!</h1>
-      <p>This is the Merchant dashboard.</p>
+     <MerchantNavbar/>
     </div>
   );
 };

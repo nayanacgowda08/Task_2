@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import "../../public/styles/login.css"
+import "../assets/styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { signUp, login } from "../Services/user-service"; 
-
 
 const RegisterLoginPage = () => {
   const [isRegister, setIsRegister] = useState(true); 
@@ -11,7 +10,7 @@ const RegisterLoginPage = () => {
     name: "",
     email: "",
     password: "",
-    role: "user",  
+    role: "user",  // Default to 'user'
   });
 
   const navigate = useNavigate();
@@ -37,6 +36,8 @@ const RegisterLoginPage = () => {
       signUp(user)
         .then((response) => {
           console.log("Registration successful:", response);
+          // Store role in localStorage
+          localStorage.setItem("userRole", formData.role); 
           if (formData.role === "merchant") {
             navigate("/merchant");
           } else {
@@ -51,15 +52,17 @@ const RegisterLoginPage = () => {
       const user = {
         email: formData.email,
         password: formData.password,
-        role: formData.role,  
+        role: formData.role,  // Retrieve selected role
       };
 
       login(user)
         .then((response) => {
           console.log("Login successful:", response);
-          //token
+          // Store token and user info in localStorage
           localStorage.setItem("token", response.token);
           localStorage.setItem("user", JSON.stringify(response.user));
+          localStorage.setItem("userRole", formData.role); // Store role in localStorage
+          
           if (formData.role === "merchant") {
             navigate("/merchant");
           } else {
@@ -156,7 +159,7 @@ const RegisterLoginPage = () => {
           </p>
         ) : (
           <p>
-            Dont have an account?{" "}
+            Don`t have an account?{" "}
             <button onClick={toggleForm} className="toggle-btn">
               Register
             </button>

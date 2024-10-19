@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import "./RegisterPage.css";
 import "../../public/styles/login.css"
+import { useNavigate } from "react-router-dom";
+import { signUp, login } from "../Services/user-service"; 
+
 
 const RegisterLoginPage = () => {
   const [isRegister, setIsRegister] = useState(true); 
@@ -10,7 +11,7 @@ const RegisterLoginPage = () => {
     name: "",
     email: "",
     password: "",
-    role: "user", 
+    role: "user",  
   });
 
   const navigate = useNavigate();
@@ -26,20 +27,49 @@ const RegisterLoginPage = () => {
     e.preventDefault();
 
     if (isRegister) {
-      // Registration logic
-      if (formData.role === "merchant") {
-        navigate("/merchant");
-      } else {
-        navigate("/user");
-      }
+      const user = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,  // user or merchant
+      };
+
+      signUp(user)
+        .then((response) => {
+          console.log("Registration successful:", response);
+          if (formData.role === "merchant") {
+            navigate("/merchant");
+          } else {
+            navigate("/user");
+          }
+        })
+        .catch((error) => {
+          console.error("Registration failed:", error);
+          alert("Registration failed. Please try again.");
+        });
     } else {
-      // Login logic
-      // Here you can add authentication logic or redirect based on email/password validation
-      if (formData.role === "merchant") {
-        navigate("/merchant");
-      } else {
-        navigate("/user");
-      }
+      const user = {
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,  
+      };
+
+      login(user)
+        .then((response) => {
+          console.log("Login successful:", response);
+          //token
+          localStorage.setItem("token", response.token);
+          localStorage.setItem("user", JSON.stringify(response.user));
+          if (formData.role === "merchant") {
+            navigate("/merchant");
+          } else {
+            navigate("/user");
+          }
+        })
+        .catch((error) => {
+          console.error("Login failed:", error);
+          alert("Login failed. Please check your credentials.");
+        });
     }
   };
 

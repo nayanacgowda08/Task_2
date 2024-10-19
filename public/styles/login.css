@@ -1,0 +1,46 @@
+.register-page {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .register-page h2 {
+    text-align: center;
+  }
+  
+  .register-page label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .register-page input[type="text"],
+  .register-page input[type="email"],
+  .register-page input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .register-page button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .register-page button:hover {
+    background-color: #45a049;
+  }
+  
+  .register-page div {
+    margin-bottom: 15px;
+  }
+  

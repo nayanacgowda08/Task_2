@@ -1,13 +1,16 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../public/styles/login.css"; 
+// import "./RegisterPage.css";
+import "../../public/styles/login.css"
 
-const RegisterPage = () => {
+const RegisterLoginPage = () => {
+  const [isRegister, setIsRegister] = useState(true); 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    role: "user", // Default role is 'user'
+    role: "user", 
   });
 
   const navigate = useNavigate();
@@ -21,27 +24,46 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.role === "merchant") {
-      navigate("/merchant");
+
+    if (isRegister) {
+      // Registration logic
+      if (formData.role === "merchant") {
+        navigate("/merchant");
+      } else {
+        navigate("/user");
+      }
     } else {
-      navigate("/user");
+      // Login logic
+      // Here you can add authentication logic or redirect based on email/password validation
+      if (formData.role === "merchant") {
+        navigate("/merchant");
+      } else {
+        navigate("/user");
+      }
     }
+  };
+
+  const toggleForm = () => {
+    setIsRegister(!isRegister);
   };
 
   return (
     <div className="register-page">
-      <h2>Register</h2>
+      <h2>{isRegister ? "Register" : "Login"}</h2>
+
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {isRegister && (
+          <div>
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        )}
 
         <div>
           <label>Email</label>
@@ -66,7 +88,7 @@ const RegisterPage = () => {
         </div>
 
         <div>
-          <label>Register As</label>
+          <label>Role</label>
           <div>
             <label>
               <input
@@ -91,10 +113,28 @@ const RegisterPage = () => {
           </div>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit">{isRegister ? "Register" : "Login"}</button>
       </form>
+
+      <div>
+        {isRegister ? (
+          <p>
+            Already have an account?{" "}
+            <button onClick={toggleForm} className="toggle-btn">
+              Login
+            </button>
+          </p>
+        ) : (
+          <p>
+            Dont have an account?{" "}
+            <button onClick={toggleForm} className="toggle-btn">
+              Register
+            </button>
+          </p>
+        )}
+      </div>
     </div>
   );
 };
 
-export default RegisterPage;
+export default RegisterLoginPage;

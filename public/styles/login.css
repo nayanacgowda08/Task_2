@@ -1,5 +1,5 @@
 .register-page {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -38,6 +38,19 @@
   
   .register-page button:hover {
     background-color: #45a049;
+  }
+  
+  .toggle-btn {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .toggle-btn:hover {
+    color: darkblue;
   }
   
   .register-page div {

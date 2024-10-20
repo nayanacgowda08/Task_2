@@ -4,6 +4,7 @@ import React from 'react';
 import "../assets/styles/productCard.css"
 
 const Product_Card = ({ id, category, description, image, price, title }) => {
+  console.log("image",image);
   return (
     <div className="product-card">
       <div className="card-image" style={{ backgroundImage: `url(${image})` }} />

@@ -35,7 +35,7 @@ const ProductList = ({ setView, setEditProductId }) => {
   };
 
   return (
-    <div className="product-list">
+    <div className="product-lists">
       <h2>My Products</h2>
       <button className="add-product-btn" onClick={() => setView("addProduct")}>
         Add Product

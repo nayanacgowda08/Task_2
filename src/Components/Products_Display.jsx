@@ -9,7 +9,8 @@ const Products_Display = () => {
 
   const fetchApi = async () => {
     try {
-      const response = await fetch('https://fakestoreapi.com/products');
+      // const response = await fetch('https://fakestoreapi.com/products');
+      const response =await fetch('http://localhost:8082/api/user/all')
       const data = await response.json();
       setProducts(data); 
       console.log(data);
@@ -26,16 +27,17 @@ const Products_Display = () => {
   return (
     <div className="product-list">
       {products.map((product) => {
-        const { id, category, description, image, price, title } = product;
+        //const { id, category, description, image, price, title } = product;
+        const {id,category,description,file,price,name}=product;
         return (
           <Product_Card
             key={id}
             id={id}
             category={category}
             description={description}
-            image={image}
+            image={file}
             price={price}
-            title={title}
+            title={name}
           />
         );
       })}

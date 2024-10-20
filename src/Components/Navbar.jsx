@@ -10,6 +10,11 @@ const Navbar = () => {
   
   let isMerchant = path.startsWith("/merchant");
 
+  const handleLogout=()=>{
+    localStorage.removeItem("userId");
+    navigate("/");
+  }
+
   return (
     <nav>
       <ul>
@@ -20,7 +25,7 @@ const Navbar = () => {
             <li><NavLink to="/merchant/orders">Orders</NavLink></li>
             <li><NavLink to="/merchant/analytics">Analytics</NavLink></li>
             <li><NavLink to="/merchant/profile">Profile</NavLink></li>
-            <li><NavLink to="/logout">Logout</NavLink></li>
+            <li><NavLink to="/" onClick={handleLogout}>Logout</NavLink></li>
           </>
         ) : (
           <>
@@ -30,7 +35,7 @@ const Navbar = () => {
             <li><NavLink to="/user/orders">Orders</NavLink></li>
             <li><NavLink to="/user/favorites">Favorites</NavLink></li>
             <li><NavLink to="/user/profile">Profile</NavLink></li>
-            <li><NavLink to="/">Logout</NavLink></li>
+            <li><NavLink to="/" onClick={handleLogout}>Logout</NavLink></li>
           </>
         )}
       </ul>

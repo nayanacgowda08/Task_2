@@ -1,19 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "../../assets/styles/userNavbar.css"
+import Navbar from "../Navbar";
+import UserHome from "./UserHome";
+import Categories from "./Categories";
 
 const UserNavbar = () => {
   return (
-    <nav>
-      <ul>
-        <li><NavLink className="no-active" to="/user/">Home</NavLink></li>
-        <li><NavLink to="/user/categories">Categories</NavLink></li>
-        <li><NavLink to="/user/cart">Cart</NavLink></li>
-        <li><NavLink to="/user/orders">Orders</NavLink></li>
-        <li><NavLink to="/user/favorites">Favorites</NavLink></li>
-        <li><NavLink to="/user/profile">Profile</NavLink></li>
-        <li><NavLink to="/logout">Logout</NavLink></li>
-      </ul>
-    </nav>
+    <>
+    <Navbar/>
+    <Routes>
+
+<Route element={<UserHome/>} path='/' />
+<Route element={<Categories/>} path='/categories' />
+{/*<Route element={<Users/>} path='/users' />
+<Route element={<Cart/>} path='/cart' />
+<Route element={<Contact/>} path='/contact' />
+<Route element={<ReadBook/>} path='/readbook/:id' /> */}
+</Routes>
+    </>
   );
 };
 

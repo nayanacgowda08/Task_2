@@ -1,0 +1,15 @@
+/* ProductList.css */
+
+.product-list {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 50px;
+    /* margin: 20px;     */
+}
+
+
+@media (max-width: 768px) {
+    .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller cards on smaller screens */
+    }
+}

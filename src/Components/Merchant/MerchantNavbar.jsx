@@ -1,20 +1,14 @@
-import { NavLink } from "react-router-dom";
 import "../../assets/styles/merchantNavbar.css"
+import Navbar from "../Navbar";
 
 
-const MerchantNavbar = () => {
-  return (
-    <nav>
-      <ul>
-        <li><NavLink className="no-active" to="/merchant/">Dashboard</NavLink></li>
-        <li><NavLink to="/merchant/products">Products</NavLink></li>
-        <li><NavLink to="/merchant/orders">Orders</NavLink></li>
-        <li><NavLink to="/merchant/analytics">Analytics</NavLink></li>
-        <li><NavLink to="/merchant/profile">Profile</NavLink></li>
-        <li><NavLink to="/logout">Logout</NavLink></li>
-      </ul>
-    </nav>
-  );
-};
+  const MerchantNavbar = () => {
+    return (
+     <>
+      <Navbar/>
 
-export default MerchantNavbar;
+     </>
+    );
+  };
+
+  export default MerchantNavbar;

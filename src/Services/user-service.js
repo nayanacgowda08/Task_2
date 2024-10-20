@@ -1,14 +1,15 @@
 import { myAxios } from "./helper";
 
+
 export const signUp = (user)=>{
     return myAxios
-    .post("api/v1/auth/register",user)
+    .post("http://localhost:8082/api/users/register",user)
     .then((response) => response.data)
 }
 
 
 export const login = (user)=>{
     return myAxios
-    .post("api/v1/auth/login",user)
+    .post("http://localhost:8082/api/users/login",user)
     .then((response) => response.data)
 }

@@ -5,85 +5,55 @@ import { useNavigate } from "react-router-dom";
 import { signUp, login } from "../Services/user-service"; 
 
 const RegisterLoginPage = () => {
-  const [isRegister, setIsRegister] = useState(true); 
+  const [isRegister, setIsRegister] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    role: "user",  // Default to 'user'
+    role: "customer",
   });
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = {
+      name: isRegister ? formData.name : undefined,
+      email: formData.email,
+      password: formData.password,
+      role: formData.role,
+    };
 
-    if (isRegister) {
-      const user = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: formData.role,  // user or merchant
-      };
-
-      signUp(user)
-        .then((response) => {
-          console.log("Registration successful:", response);
-          // Store role in localStorage
-          localStorage.setItem("userRole", formData.role); 
-          if (formData.role === "merchant") {
-            navigate("/merchant");
-          } else {
-            navigate("/user");
-          }
-        })
-        .catch((error) => {
-          console.error("Registration failed:", error);
-          alert("Registration failed. Please try again.");
-        });
-    } else {
-      const user = {
-        email: formData.email,
-        password: formData.password,
-        role: formData.role,  // Retrieve selected role
-      };
-
-      login(user)
-        .then((response) => {
-          console.log("Login successful:", response);
-          // Store token and user info in localStorage
-          localStorage.setItem("token", response.token);
-          localStorage.setItem("user", JSON.stringify(response.user));
-          localStorage.setItem("userRole", formData.role); // Store role in localStorage
-          
-          if (formData.role === "merchant") {
-            navigate("/merchant");
-          } else {
-            navigate("/user");
-          }
-        })
-        .catch((error) => {
-          console.error("Login failed:", error);
-          alert("Login failed. Please check your credentials.");
-        });
+    try {
+      const response = isRegister ? await signUp(user) : await login(user);
+      localStorage.setItem("userId", response.id);
+      navigate(response.role === "MERCHANT" ? "/merchant" : "/user");
+    } catch (error) {
+      alert(isRegister ? "Registration failed. Please try again." : "Login failed. Please check your credentials.");
     }
   };
 
   const toggleForm = () => {
-    setIsRegister(!isRegister);
+    setIsRegister((prev) => !prev);
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      role: "customer",
+    });
   };
 
   return (
     <div className="register-page">
       <h2>{isRegister ? "Register" : "Login"}</h2>
-
       <form onSubmit={handleSubmit}>
         {isRegister && (
           <div>
@@ -97,7 +67,6 @@ const RegisterLoginPage = () => {
             />
           </div>
         )}
-
         <div>
           <label>Email</label>
           <input
@@ -108,7 +77,6 @@ const RegisterLoginPage = () => {
             required
           />
         </div>
-
         <div>
           <label>Password</label>
           <input
@@ -119,50 +87,45 @@ const RegisterLoginPage = () => {
             required
           />
         </div>
-
-        <div>
-          <label>Role</label>
+        {isRegister && (
           <div>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="user"
-                checked={formData.role === "user"}
-                onChange={handleChange}
-              />
-              End User
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="role"
-                value="merchant"
-                checked={formData.role === "merchant"}
-                onChange={handleChange}
-              />
-              Merchant
-            </label>
+            <label>Role</label>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="customer"
+                  checked={formData.role === "customer"}
+                  onChange={handleChange}
+                />
+                Customer
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="merchant"
+                  checked={formData.role === "merchant"}
+                  onChange={handleChange}
+                />
+                Merchant
+              </label>
+            </div>
           </div>
-        </div>
-
+        )}
         <button type="submit">{isRegister ? "Register" : "Login"}</button>
       </form>
-
       <div>
         {isRegister ? (
           <p>
             Already have an account?{" "}
-            <button onClick={toggleForm} className="toggle-btn">
-              Login
-            </button>
+            <button onClick={toggleForm} className="toggle-btn">Login</button>
           </p>
         ) : (
           <p>
-            Don`t have an account?{" "}
-            <button onClick={toggleForm} className="toggle-btn">
-              Register
-            </button>
+            Don't have an account?{" "}
+            <button onClick={toggleForm} className="toggle-btn">Register</button>
           </p>
         )}
       </div>

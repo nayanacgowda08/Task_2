@@ -41,6 +41,7 @@ const RegisterLoginPage = () => {
     }
   };
 
+
   const toggleForm = () => {
     setIsRegister((prev) => !prev);
     setFormData({

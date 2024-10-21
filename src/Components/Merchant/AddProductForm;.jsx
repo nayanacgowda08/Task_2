@@ -6,50 +6,49 @@ const AddProductForm = ({ setView }) => {
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
   const [image, setImage] = useState(null);
-  const [description,setDescription]=useState("");
-  const [category,setCategory] = useState("");
-  const [usp,setUsp] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [usp, setUsp] = useState("");
 
   const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
+    setImage(e.target.files[0]); 
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const merchantId = localStorage.getItem("userId");
     const formData = new FormData();
-    console.log(typeof(image));
-    formData.append("file", URL.createObjectURL(image)); 
+
+  
+    formData.append("image", image); 
     formData.append("name", productName);
     formData.append("price", price);
     formData.append("stock", stock);
     formData.append("usp", usp);
     formData.append("description", description);
     formData.append("category", category);
-    console.log("image"," ",image);
 
     try {
+      const response = await fetch(`http://localhost:8082/api/service/merchant/${merchantId}/upld`, {
+        method: 'POST',
+        body: formData, 
+        headers: {
+          
+        },
+      });
 
-        const response = await fetch(`http://localhost:8082/api/service/merchant/${merchantId}/upload`, {
-            method: 'POST',
-            body: formData,
-        });
-
-
-        if (!response.ok) {
-            throw new Error('Failed to upload product');
-        }
-        setView("productList");
+      if (!response.ok) {
+        throw new Error('Failed to upload product');
+      }
+      setView("productList");
     } catch (error) {
-        console.error("Error:", error);
+      console.error("Error:", error);
     }
-};
+  };
 
   return (
     <div className="add-product-container">
-     
       <button className="back-btn" onClick={() => setView("productList")}>
         &larr; Back
       </button>
@@ -107,7 +106,7 @@ const AddProductForm = ({ setView }) => {
         </div>
 
         <div className="form-group">
-          <label>Usp: </label>
+          <label>USP: </label>
           <input
             type="text"
             value={usp}

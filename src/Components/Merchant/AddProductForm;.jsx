@@ -9,19 +9,19 @@ const AddProductForm = ({ setView }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [usp, setUsp] = useState("");
+  const [loading, setLoading] = useState(false); 
 
   const handleImageUpload = (e) => {
-    setImage(e.target.files[0]); 
+    setImage(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
 
     const merchantId = localStorage.getItem("userId");
     const formData = new FormData();
-
-  
-    formData.append("image", image); 
+    formData.append("image", image);
     formData.append("name", productName);
     formData.append("price", price);
     formData.append("stock", stock);
@@ -32,18 +32,19 @@ const AddProductForm = ({ setView }) => {
     try {
       const response = await fetch(`http://localhost:8082/api/service/merchant/${merchantId}/upld`, {
         method: 'POST',
-        body: formData, 
-        headers: {
-          
-        },
+        body: formData,
       });
 
       if (!response.ok) {
         throw new Error('Failed to upload product');
       }
+
+  
       setView("productList");
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -126,7 +127,16 @@ const AddProductForm = ({ setView }) => {
           </div>
         )}
 
-        <button type="submit" className="submit-btn">Add Product</button>
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? "Uploading..." : "Add Product"}
+        </button>
+
+        {loading && (
+          <div className="spinner">
+            <div className="loader"></div> 
+            <p>Uploading your product...</p>
+          </div>
+        )}
       </form>
     </div>
   );

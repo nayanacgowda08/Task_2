@@ -65,3 +65,13 @@
 .add-to-cart:hover {
     background-color: #218838; 
 }
+
+.view-details {
+    padding: 8px 12px; 
+    background-color: blue; 
+    color: white;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    margin-top: 20px;
+}

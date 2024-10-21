@@ -24,20 +24,26 @@ const Products_Display = () => {
     fetchApi(); // Fetch products when component mounts
   }, []);
 
+  console.log(products)
+
   return (
     <div className="product-list">
       {products.map((product) => {
         //const { id, category, description, image, price, title } = product;
-        const {id,category,description,file,price,name}=product;
+        const {productId,category,description,file,price,name, stocks, rating, merchantId, usp}=product;
         return (
           <Product_Card
-            key={id}
-            id={id}
+            key={productId}
+            id={productId}
             category={category}
             description={description}
             image={file}
             price={price}
             title={name}
+            stocks={stocks}
+            rating={rating}
+            merchantId={merchantId}
+            usp={usp}
           />
         );
       })}

@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../assets/styles/productCard.css"
 
-const Product_Card = ({ id, category, description, image, price, title, stocks, rating, merchantId, usp }) => {
+const Product_Card = ({ id, category, description, image, price, title, stock, rating, merchantId, usp }) => {
   const navigate = useNavigate();
     const handleViewDetails = () => {
     navigate(`/detail/${id}`, {
@@ -14,7 +14,7 @@ const Product_Card = ({ id, category, description, image, price, title, stocks, 
         image,
         price,
         title,
-        stocks,
+        stock,
         rating,
         merchantId,
         usp

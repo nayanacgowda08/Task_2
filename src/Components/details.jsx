@@ -1,12 +1,29 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaShippingFast, FaUndo, FaMoneyBillAlt } from 'react-icons/fa'; // Importing icons
 import "../assets/styles/details.css"; // Ensure to style accordingly
+import { useEffect } from 'react';
 
 const Details = () => {
   const location = useLocation();
-  const { id, category, description, image, price, title, stocks, rating, merchantId, usp } = location.state;
+  const navigate = useNavigate();
+
+  // Redirect to homepage if location.state is null
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId || !location.state) {
+      navigate('/'); // Redirect if user is not logged in or state is missing
+    }
+  }, [navigate, location.state]);
+
+  // Handle when location.state is null (for direct route access)
+  if (!location.state) {
+    return <p>Loading or redirecting...</p>; // Optional: Display a loading message or redirect
+  }
+
+  const { id, category, description, image, price, title, stock, rating, merchantId, usp } = location.state;
+
 
   return (
     <div className="details-container">
@@ -24,7 +41,7 @@ const Details = () => {
           {/* Product Details */}
           <div className="product-details">
             <p className="details-status">
-              Status: <span className={stocks > 0 ? "in-stock" : "out-of-stock"}>{stocks > 0 ? "In Stock" : "Out of Stock"}</span>
+              Status: <span className={stock > 0 ? "in-stock" : "out-of-stock"}>{stock > 0 ? "In Stock" : "Out of Stock"}</span>
             </p>
             <p className="details-category">Category: {category}</p>
             <p className="details-policy">Policy: 7 Days Replacement & Return</p>
@@ -38,7 +55,7 @@ const Details = () => {
 
           {/* Cart Button Section */}
           <div className="cart-section">
-            {stocks > 0 ? (
+            {stock > 0 ? (
               <button className="add-to-cart">Add to Cart</button>
             ) : (
               <button className="out-of-stock-btn" disabled>Out of Stock</button>

@@ -4,10 +4,21 @@ import EditProductForm from "./EditProductForm";
 import ProductList from "./ProductList"
 import MerchantNavbar from "./MerchantNavbar"
 import "../../assets/styles/MerchantPage.css"
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const MerchantPage = () => {
   const [view, setView] = useState("productList"); 
   const [editProductId, setEditProductId] = useState(null); 
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      navigate('/')
+    }
+  })
+
   const renderView = () => {
     switch (view) {
       case "addProduct":

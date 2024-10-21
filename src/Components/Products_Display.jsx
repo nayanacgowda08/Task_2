@@ -30,7 +30,7 @@ const Products_Display = () => {
     <div className="product-list">
       {products.map((product) => {
         //const { id, category, description, image, price, title } = product;
-        const {productId,category,description,file,price,name, stocks, rating, merchantId, usp}=product;
+        const {productId,category,description,file,price,name, stock, rating, merchantId, usp}=product;
         return (
           <Product_Card
             key={productId}
@@ -40,7 +40,7 @@ const Products_Display = () => {
             image={file}
             price={price}
             title={name}
-            stocks={stocks}
+            stock={stock}
             rating={rating}
             merchantId={merchantId}
             usp={usp}

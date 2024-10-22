@@ -24,105 +24,55 @@ const RegisterLoginPage = () => {
     }));
   };
 
+  const validateForm = () => {
+    const { email, password, name } = formData;
+    if (isRegister && !name) {
+      setError("Name is required.");
+      return false;
+    }
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      setError("A valid email is required.");
+      return false;
+    }
+    if (
+      !password ||
+      !/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z]).{8,}/.test(password)
+    ) {
+      setError(
+        "Password must be at least 8 characters long and include a number, a special character, an uppercase and a lowercase letter."
+      );
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (!validateForm()) {
+      setLoading(false);
+      return;
+    }
+
     const user = {
       name: isRegister ? formData.name : undefined,
       email: formData.email,
       password: formData.password,
       role: formData.role,
-
-      
-    };
-
-    const isValidEmail = (email) => {
-      // Regular expression for basic email validation
-      const emailRegex = /^\S+@\S+\.\S+$/;
-      return emailRegex.test(email);
-    };
-  
-    const isValidPhoneNumber = (phoneNumber) => {
-      // Regular expression for basic phone number validation (10 digits)
-      const phoneRegex = /^\d{10}$/;
-      return phoneRegex.test(phoneNumber);
-    };
-  
-    const isValidPassword = (password) => {
-      // Regular expressions for password validation
-      const symbolRegex = /[!@#$%^&*(),.?":{}|<>]/;
-      const numberRegex = /[0-9]/;
-      const upperCaseRegex = /[A-Z]/;
-      const lowerCaseRegex = /[a-z]/;
-      return (
-        password.length >= 8 &&
-        symbolRegex.test(password) &&
-        numberRegex.test(password) &&
-        upperCaseRegex.test(password) &&
-        lowerCaseRegex.test(password)
-      );
-    };
-  
-    const isValidAge = (age) => {
-      return parseInt(age) >= 18 && parseInt(age) <= 100;
-    };
-  
-    const validateForm = () => {
-      let newErrors = {};
-  
-      if (!formData.firstName) {
-        newErrors.firstName = "First name is required";
-      }
-      if (!formData.lastName) {
-        newErrors.lastName = "Last name is required";
-      }
-      if (!formData.email) {
-        newErrors.email = "Email is required";
-      } else if (!isValidEmail(formData.email)) {
-        newErrors.email = "Invalid email format";
-      }
-      if (!formData.phoneNumber) {
-        newErrors.phoneNumber = "Phone number is required";
-      } else if (!isValidPhoneNumber(formData.phoneNumber)) {
-        newErrors.phoneNumber = "Phone number must be 10 digits";
-      }
-      if (!formData.password) {
-        newErrors.password = "Password is required";
-      } else if (!isValidPassword(formData.password)) {
-        newErrors.password =
-          "Password must be at least 8 characters long and contain at least one symbol, one number, one uppercase letter, and one lowercase letter";
-      }
-      if (!formData.confirmPassword) {
-        newErrors.confirmPassword = "Confirm password is required";
-      } else if (formData.confirmPassword !== formData.password) {
-        newErrors.confirmPassword = "Passwords must match";
-      }
-      if (!formData.age) {
-        newErrors.age = "Age is required";
-      } else if (!isValidAge(formData.age)) {
-        newErrors.age =
-          "You must be at least 18 years old and not older than 100 years";
-      }
-      if (!formData.gender) {
-        newErrors.gender = "Gender is required";
-      }
-      if (formData.interests.length === 0) {
-        newErrors.interests = "Select at least one interest";
-      }
-      if (!formData.birthDate) {
-        newErrors.birthDate = "Date of birth is required";
-      }
-  
-      setErrors(newErrors);
-  
-      return Object.keys(newErrors).length === 0;
     };
 
     try {
       const response = isRegister ? await signUp(user) : await login(user);
       localStorage.setItem("userId", response.id);
+      if(response.role){
       navigate(response.role === "MERCHANT" ? "/merchant" : "/user");
+      }
+      else{
+        setError(response.message);
+      }
     } catch (error) {
+      console.log(error);
       setError(isRegister ? "Registration failed. Please try again." : "Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
@@ -137,7 +87,7 @@ const RegisterLoginPage = () => {
       password: "",
       role: "customer",
     });
-    setError(""); // Reset error on form toggle
+    setError(""); // Clear errors on toggle
   };
 
   return (
@@ -151,11 +101,10 @@ const RegisterLoginPage = () => {
               <input
                 type="text"
                 name="name"
-                placeholder=" " // Important for floating label effect
+                placeholder=" "
                 value={formData.name}
                 onChange={handleChange}
                 required
-                pattern=".{1,}" // At least one character required
               />
               <label>Name</label>
             </div>
@@ -164,7 +113,7 @@ const RegisterLoginPage = () => {
             <input
               type="email"
               name="email"
-              placeholder=" " // Important for floating label effect
+              placeholder=" "
               value={formData.email}
               onChange={handleChange}
               required
@@ -175,7 +124,7 @@ const RegisterLoginPage = () => {
             <input
               type="password"
               name="password"
-              placeholder=" " // Important for floating label effect
+              placeholder=" "
               value={formData.password}
               onChange={handleChange}
               required
@@ -210,19 +159,23 @@ const RegisterLoginPage = () => {
             </div>
           )}
           <button type="submit" disabled={loading}>
-            {loading ? "Loading..." : (isRegister ? "Register" : "Login")}
+            {loading ? "Loading..." : isRegister ? "Register" : "Login"}
           </button>
         </form>
         <div className="toggle-btn-container">
           {isRegister ? (
             <p>
               Already have an account?{" "}
-              <button onClick={toggleForm} className="toggle-btn">Login</button>
+              <button onClick={toggleForm} className="toggle-btn">
+                Login
+              </button>
             </p>
           ) : (
             <p>
               Don't have an account?{" "}
-              <button onClick={toggleForm} className="toggle-btn">Register</button>
+              <button onClick={toggleForm} className="toggle-btn">
+                Register
+              </button>
             </p>
           )}
         </div>
@@ -231,5 +184,4 @@ const RegisterLoginPage = () => {
   );
 };
 
-export default RegisterLoginPage; 
-
+export default RegisterLoginPage;

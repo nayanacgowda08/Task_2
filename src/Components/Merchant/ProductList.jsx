@@ -29,9 +29,21 @@ const ProductList = ({ setView, setEditProductId }) => {
     fetchProducts();
   }, []);
 
-  const handleDelete = (productId) => {
+  // const handleDelete = (productId) => {
+  //   // Delete product logic
+  //   setProducts(products.filter((product) => product.id !== productId));
+  // };
+
+  const handleDelete = async(productId) => {
     // Delete product logic
     setProducts(products.filter((product) => product.id !== productId));
+    try {
+      const response = await axios.delete(`http://localhost:8082/api/user/delete/${productId}`);
+      console.log("Product deleted successfully:", response.data);
+    } catch (error) {
+    
+      console.error("Error deleting product:", error);
+    }
   };
 
   return (

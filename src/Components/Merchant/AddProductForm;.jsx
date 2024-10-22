@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../../assets/styles/addProduct.css";
 
 const AddProductForm = ({ setView }) => {
@@ -10,6 +10,21 @@ const AddProductForm = ({ setView }) => {
   const [category, setCategory] = useState("");
   const [usp, setUsp] = useState("");
   const [loading, setLoading] = useState(false); 
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("http://localhost:8082/api/categories/all"); 
+        const data = await response.json();
+        setCategories(data); 
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleImageUpload = (e) => {
     setImage(e.target.files[0]);
@@ -27,7 +42,8 @@ const AddProductForm = ({ setView }) => {
     formData.append("stock", stock);
     formData.append("usp", usp);
     formData.append("description", description);
-    formData.append("category", category);
+    // formData.append("category", category);
+    formData.append("categoryId", category); 
 
     try {
       const response = await fetch(`http://localhost:8082/api/service/merchant/${merchantId}/upld`, {
@@ -96,7 +112,7 @@ const AddProductForm = ({ setView }) => {
           />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Category: </label>
           <input
             type="text"
@@ -104,6 +120,21 @@ const AddProductForm = ({ setView }) => {
             onChange={(e) => setCategory(e.target.value)}
             required
           />
+        </div> */}
+             <div className="form-group">
+          <label>Category: </label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-group">

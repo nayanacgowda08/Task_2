@@ -24,15 +24,25 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
 
   return (
     <div className="product-card">
-      <div className="card-image" style={{ backgroundImage: `url(${image})` }} />
+     <div className="row">
+     <div className="card-image"  
+      // style={{ backgroundImage: url('https://nobero.com/cdn/shop/files/black_8f2f0bb4-9293-4d6f-a179-c918d7602384.jpg?v=1712232992') }} 
+       style={{ backgroundImage: `url(${image})`,
+      padding:"10px"
+      }} 
+       />
       <div className="card-content">
-        <h3>{title}</h3>
+        <h4>{title} </h4>
         <p className="category">{category}</p>
         <p className="description">{description}</p>
         <p className="price">${price}</p>
-        <button className="add-to-cart">Add to Cart</button>
-        <button className="view-details" onClick={handleViewDetails}>View Details</button>
-      </div>
+         </div>
+      <div className="btn-flex">
+         <button className="add-to-cartt">Add to Cart</button>
+        <button className="view-detailss" onClick={handleViewDetails}>View Details</button>
+   </div>
+     
+     </div>
     </div>
   );
 };

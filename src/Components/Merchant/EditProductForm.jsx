@@ -1,33 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../assets/styles/editProduct.css";
 
 const EditProductForm = ({ setView, product }) => {
-  const [productName, setProductName] = useState(product.name);
-  const [price, setPrice] = useState(product.price);
-  const [stock, setStock] = useState(product.stock);
+  const [productName, setProductName] = useState("");
+  const [price, setPrice] = useState(0);
+  const [stock, setStock] = useState(0);
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(""); // New state to manage preview URL
+
+  useEffect(() => {
+    if (product) {
+      setProductName(product.name);
+      setPrice(product.price);
+      setStock(product.stock);
+      setImagePreview(product.image); // Initialize with the current product image URL
+    }
+  }, [product]);
 
   const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    setImage(file);
+    if (file) {
+      // Create a preview URL only if a file is selected
+      setImagePreview(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const updatedProduct = {
       name: productName,
       price: price,
       stock: stock,
-      image: image ? URL.createObjectURL(image) : product.image,
+      image: image ? imagePreview : product.image, // Use uploaded image preview or the current product image URL
     };
+
     console.log("Product Updated:", updatedProduct);
     setView("productList");
   };
 
   return (
     <div className="edit-product-container">
-      {/* Back Button */}
       <button className="back-btn" onClick={() => setView("productList")}>
-        &larr; Back
+        &larr; {"  "} Back
       </button>
 
       <form className="edit-product-form" onSubmit={handleSubmit}>
@@ -67,13 +83,9 @@ const EditProductForm = ({ setView, product }) => {
           <input type="file" accept="image/*" onChange={handleImageUpload} />
         </div>
 
-        {image ? (
+        {imagePreview && (
           <div className="image-preview">
-            <img src={URL.createObjectURL(image)} alt="Product Preview" />
-          </div>
-        ) : (
-          <div className="image-preview">
-            <img src={product.image} alt="Current Product" />
+            <img src={imagePreview} alt="Product Preview" />
           </div>
         )}
 

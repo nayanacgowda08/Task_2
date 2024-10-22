@@ -46,6 +46,11 @@ const ProductList = ({ setView, setEditProductId }) => {
     }
   };
 
+  const handleEdit = (product) => {
+    setEditProductId(product); // Now passing full product details
+    setView("editProduct");
+  };
+
   return (
     <div className="product-lists">
       <h2>My Products</h2>
@@ -74,10 +79,7 @@ const ProductList = ({ setView, setEditProductId }) => {
               <td>
                 <button onClick={() => handleDelete(product.id)}>Delete</button>
                 <button
-                  onClick={() => {
-                    setEditProductId(product.id);
-                    setView("editProduct");
-                  }}
+                   onClick={() => handleEdit(product)} 
                 >
                   Edit
                 </button>

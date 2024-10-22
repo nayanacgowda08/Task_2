@@ -17,7 +17,6 @@ const Details = () => {
     }
   }, [navigate, location.state]);
 
-  // Handle when location.state is null (for direct route access)
   if (!location.state) {
     return <p>Loading or redirecting...</p>; // Optional: Display a loading message or redirect
   }

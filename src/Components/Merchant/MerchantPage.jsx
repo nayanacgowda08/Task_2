@@ -9,7 +9,9 @@ import { useEffect } from "react";
 
 const MerchantPage = () => {
   const [view, setView] = useState("productList"); 
-  const [editProductId, setEditProductId] = useState(null); 
+  const [editProductId, setEditProductId] = useState({}); 
+  console.log(editProductId.name);
+  
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -27,7 +29,8 @@ const MerchantPage = () => {
         return (
           <EditProductForm
             setView={setView}
-            product={{ id: editProductId, name: "Sample Product", price: 1000, stock: 5, image: "" }}
+            // product={{ id: editProductId, name: "Sample Product", price: 1000, stock: 5, image: "" }}
+            product={editProductId}
           />
         );
       case "productList":

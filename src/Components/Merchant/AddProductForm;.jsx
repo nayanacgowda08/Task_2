@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../assets/styles/addProduct.css";
 
 const AddProductForm = ({ setView }) => {
@@ -11,11 +11,12 @@ const AddProductForm = ({ setView }) => {
   const [usp, setUsp] = useState("");
   const [loading, setLoading] = useState(false); 
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8082/api/categories/all"); 
+        const response = await fetch("http://localhost:8082/api/categories/all");
         const data = await response.json();
         setCategories(data); 
       } catch (error) {
@@ -33,6 +34,20 @@ const AddProductForm = ({ setView }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); 
+    setError(""); 
+
+  
+    if (price < 0) {
+      setError("Price should be greater than or equal to 0");
+      setLoading(false);
+      return;
+    }
+
+    if (stock <= 0) {
+      setError("Stock should be greater than 0");
+      setLoading(false);
+      return;
+    }
 
     const merchantId = localStorage.getItem("userId");
     const formData = new FormData();
@@ -42,8 +57,7 @@ const AddProductForm = ({ setView }) => {
     formData.append("stock", stock);
     formData.append("usp", usp);
     formData.append("description", description);
-    // formData.append("category", category);
-    formData.append("categoryId", category); 
+    formData.append("categoryId", category);
 
     try {
       const response = await fetch(`http://localhost:8082/api/service/merchant/${merchantId}/upld`, {
@@ -55,7 +69,6 @@ const AddProductForm = ({ setView }) => {
         throw new Error('Failed to upload product');
       }
 
-  
       setView("productList");
     } catch (error) {
       console.error("Error:", error);
@@ -72,6 +85,8 @@ const AddProductForm = ({ setView }) => {
 
       <form className="add-product-form" onSubmit={handleSubmit}>
         <h2>Add New Product</h2>
+        {error && <p className="error-message">{error}</p>} 
+
         <div className="form-group">
           <label>Product Name:</label>
           <input
@@ -112,16 +127,7 @@ const AddProductForm = ({ setView }) => {
           />
         </div>
 
-        {/* <div className="form-group">
-          <label>Category: </label>
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-          />
-        </div> */}
-             <div className="form-group">
+        <div className="form-group">
           <label>Category: </label>
           <select
             value={category}

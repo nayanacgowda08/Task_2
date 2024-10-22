@@ -26,8 +26,13 @@ const RegisterLoginPage = () => {
 
   const validateForm = () => {
     const { email, password, name } = formData;
+    
     if (isRegister && !name) {
       setError("Name is required.");
+      return false;
+    }
+    if(isRegister && name && name.length >30){
+      setError("Name cannot be exceeded more than 30 character.");
       return false;
     }
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
@@ -87,7 +92,7 @@ const RegisterLoginPage = () => {
       password: "",
       role: "customer",
     });
-    setError(""); // Clear errors on toggle
+    setError(""); 
   };
 
   return (
@@ -133,7 +138,7 @@ const RegisterLoginPage = () => {
           </div>
           {isRegister && (
             <div className="radio-container">
-              <label>Role</label>
+              <label>Register as</label>
               <div>
                 <label className="radio-label">
                   <input

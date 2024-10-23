@@ -2,42 +2,54 @@ import React, { useEffect, useState } from "react";
 import "../../assets/styles/editProduct.css";
 
 const EditProductForm = ({ setView, product }) => {
-  const [productName, setProductName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [stock, setStock] = useState(0);
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(""); // New state to manage preview URL
+  const [productName, setProductName] = useState(product.name);
+  const [price, setPrice] = useState(product.price);
+  const [stock, setStock] = useState(product.stock);
+  const [image, setImage] = useState(null); // Initialize image as null
+  const [imagePreview, setImagePreview] = useState(product.image); // Set the initial preview to the product image
+  const [usp, setusp] = useState(product.usp);
+  const [description, setDescription] = useState(product.description);
+  const [category, setCAT] = useState("");
 
-  useEffect(() => {
-    if (product) {
-      setProductName(product.name);
-      setPrice(product.price);
-      setStock(product.stock);
-      setImagePreview(product.image); // Initialize with the current product image URL
-    }
-  }, [product]);
-
+  // Function to handle the image upload and update preview
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+    const file = e.target.files[0]; // Get the selected file
+    setImage(file); // Set the file to state for later upload
     if (file) {
-      // Create a preview URL only if a file is selected
-      setImagePreview(URL.createObjectURL(file));
+      setImagePreview(URL.createObjectURL(file)); // Update the preview with the selected file
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedProduct = {
-      name: productName,
-      price: price,
-      stock: stock,
-      image: image ? imagePreview : product.image, // Use uploaded image preview or the current product image URL
-    };
+    // Create FormData and append fields
+    const formData = new FormData();
+    formData.append("name", productName);
+    formData.append("stock", stock);
+    formData.append("price", price);
+    
+    // Append the image file if a new one was selected
+    if (image) {
+      formData.append("image", image); // Append the image file
+    }
 
-    console.log("Product Updated:", updatedProduct);
-    setView("productList");
+    const productId = product.id;
+
+    try {
+      const response = await fetch(`http://localhost:8082/api/user/update/product/${productId}`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload product");
+      }
+
+      setView("productList");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -83,6 +95,7 @@ const EditProductForm = ({ setView, product }) => {
           <input type="file" accept="image/*" onChange={handleImageUpload} />
         </div>
 
+        {/* Show the new image preview if uploaded, else the existing product image */}
         {imagePreview && (
           <div className="image-preview">
             <img src={imagePreview} alt="Product Preview" />

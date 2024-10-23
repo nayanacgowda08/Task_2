@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../assets/styles/productCard.css";
 import { CartContext } from '../context/CartContext'; 
@@ -7,7 +7,10 @@ import axios from 'axios';
 const Product_Card = ({ id, category, description, image, price, title, stock, rating, merchantId, usp }) => {
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext); 
+  const [inCart, setInCart] = useState(false); // State to track if product is in the cart
+  const userId = localStorage.getItem("userId"); // Get the current user ID
 
+  // Fetch the cart items for the logged-in user
   const handleViewDetails = () => {
     navigate(`/detail/${id}`, {
       state: {
@@ -25,35 +28,65 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
     });
   };
 
-  const handleAddToCart = async () => {
-    const userId = localStorage.getItem("userId");
-  
-    // Create the cart item DTO with product ID and quantity
-    const cartItemDTO = {
-      productId: id,  // This is the product ID
-      quantity: 1,    // Default quantity set to 1
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      if (!userId) return; 
+
+      try {
+        const response = await axios.get(`http://localhost:8082/api/cart/${userId}`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 200) {
+          
+          const cartItems = response.data.items; // Assuming the API returns an array of cart items
+          const productInCart = cartItems.some(item => item.productId === id); // Check if the product is in the cart
+          setInCart(productInCart); // Set the inCart state accordingly
+        }
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
     };
-  
+
+    fetchCartItems();
+  }, [id, userId]); // Effect runs when `id` or `userId` changes
+
+  // Navigate to the cart page
+  const handleGoToCart = () => {
+    navigate('/user/cart');
+  };
+
+  const handleAddToCart = async () => {
+    if (!userId) {
+      console.error("User not logged in");
+      return;
+    }
+
+    const cartItemDTO = {
+      productId: id,
+      quantity: 1,
+    };
+
     try {
       const response = await axios.post(`http://localhost:8082/api/cart/${userId}/add`, cartItemDTO, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-  
+
       if (response.status === 200 || response.status === 201) {
-        console.log("Product added to cart successfully:", response.data);
-        // Optionally, handle success (e.g., show a success message)
+        console.log(response.data);
+        setInCart(true); // Mark the product as in the cart after adding it
       } else {
         console.error("Failed to add product to cart.");
-        // Optionally, handle errors (e.g., show an error message)
       }
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
   };
-  
-  
+
   return (
     <div className="product-card">
       <div className="row">
@@ -67,7 +100,11 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
           <p className="price">${price}</p>
         </div>
         <div className="btn-flex">
-          <button className="add-to-cartt" onClick={handleAddToCart}>Add to Cart</button>
+          {inCart ? (
+            <button className="go-to-cart" onClick={handleGoToCart}>Go to Cart</button>
+          ) : (
+            <button className="add-to-cartt" onClick={handleAddToCart}>Add to Cart</button>
+          )}
           <button className="view-detailss" onClick={handleViewDetails}>View Details</button>
         </div>
       </div>

@@ -32,7 +32,7 @@ const Cart = () => {
 
   const decreaseQuantity = async (productId, currentQuantity) => {
     try {
-      if (currentQuantity > 1) {
+      
         const updatedQuantity = currentQuantity - 1;
         const q = { quantity: updatedQuantity };
         await axios.put(`http://localhost:8082/api/cart/${userId}/update/${productId}`, q, {
@@ -41,7 +41,7 @@ const Cart = () => {
           },
         });
         fetchItems();
-      }
+      
     } catch (error) {
       console.error("Error updating quantity:", error);
     }

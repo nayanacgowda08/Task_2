@@ -3,16 +3,16 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import img1 from "../assets/images/bg-1.webp"
-import img2 from "../assets/images/bg-2.webp"
-import img3 from "../assets/images/bg-3.webp"
-import img4 from "../assets/images/bg-4.webp"
+import img1 from "../assets/images/ecom1.png"
+import img2 from "../assets/images/ecom.png"
+// import img3 from "../assets/images/ecom2.jpg"
+import img4 from "../assets/images/ecom3.jpg"
 
 
 const images = [
   img1,  
   img2,
-  img3,
+  // img3,
   img4
 ];
 

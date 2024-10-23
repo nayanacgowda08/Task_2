@@ -3,6 +3,7 @@ import "../../assets/styles/userNavbar.css"
 import Navbar from "../Navbar";
 import UserHome from "./UserHome";
 import Cart from "../Cart";
+import Orders from "./Orders";
 
 const UserNavbar = () => {
   return (
@@ -12,7 +13,7 @@ const UserNavbar = () => {
 
 <Route element={<UserHome/>} path='/' />
 <Route element={<Cart/>} path='/cart' />
-{/* <Route element={<Categories/>} path='/categories' /> */}
+<Route element={<Orders/>} path='/orders' />
 {/*<Route element={<Users/>} path='/users' />
 <Route element={<Contact/>} path='/contact' />
 <Route element={<ReadBook/>} path='/readbook/:id' /> */}

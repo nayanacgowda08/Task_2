@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios"; 
 import "../../assets/styles/listProduct.css";
+import { BASE_URL } from "../../Services/helper";
 
 const ProductList = ({ setView, setEditProductId }) => {
   const [products, setProducts] = useState([]);

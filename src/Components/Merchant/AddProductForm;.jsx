@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../assets/styles/addProduct.css";
+import { BASE_URL } from "../../Services/helper";
 
 const AddProductForm = ({ setView }) => {
   const [productName, setProductName] = useState("");

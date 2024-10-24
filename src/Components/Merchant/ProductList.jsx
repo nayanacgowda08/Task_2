@@ -9,7 +9,7 @@ const ProductList = ({ setView, setEditProductId }) => {
     const fetchProducts = async () => {
       try {
         const merchantId= localStorage.getItem("userId");
-        const response = await axios.get(`http://localhost:8082/api/user/${merchantId}/products`);
+        const response = await axios.get(`${BASE_URL}/user/${merchantId}/products`);
         const apiProducts = response.data;
 
         const mappedProducts = apiProducts.map((product) => ({
@@ -38,7 +38,7 @@ const ProductList = ({ setView, setEditProductId }) => {
     // Delete product logic
     setProducts(products.filter((product) => product.id !== productId));
     try {
-      const response = await axios.delete(`http://localhost:8082/api/user/delete/${productId}`);
+      const response = await axios.delete(`${BASE_URL}/user/delete/${productId}`);
       console.log("Product deleted successfully:", response.data);
     } catch (error) {
     

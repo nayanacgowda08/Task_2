@@ -16,7 +16,7 @@ const AddProductForm = ({ setView }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8082/api/categories/all");
+        const response = await fetch(`${BASE_URL}/categories/all`);
         const data = await response.json();
         setCategories(data); 
       } catch (error) {

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Product_Card from './Product_Card';
 import "../assets/styles/productLists.css"
+import { BASE_URL } from '../Services/helper';
 
 const Products_Display = () => {
   const [products, setProducts] = useState([]); // State to store products
@@ -10,7 +11,7 @@ const Products_Display = () => {
   const fetchApi = async () => {
     try {
       // const response = await fetch('https://fakestoreapi.com/products');
-      const response =await fetch('http://localhost:8082/api/user/all')
+      const response =await fetch(`${BASE_URL}/user/all`)
       const data = await response.json();
       setProducts(data); 
       console.log(data);

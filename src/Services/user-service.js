@@ -1,15 +1,15 @@
 import { myAxios } from "./helper";
-
+import { BASE_URL } from "./helper";
 
 export const signUp = (user)=>{
     return myAxios
-    .post("http://localhost:8082/api/users/register",user)
+    .post(`${BASE_URL}/users/register`,user)
     .then((response) => response.data)
 }
 
 
 export const login = (user)=>{
     return myAxios
-    .post("http://localhost:8082/api/users/login",user)
+    .post(`${BASE_URL}/users/login`,user)
     .then((response) => response.data)
 }

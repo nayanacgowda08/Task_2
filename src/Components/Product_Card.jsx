@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "../assets/styles/productCard.css";
 import { CartContext } from '../context/CartContext'; 
 import axios from 'axios';
+import { BASE_URL } from '../Services/helper';
 
 const Product_Card = ({ id, category, description, image, price, title, stock, rating, merchantId, usp }) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
       if (!userId) return; 
 
       try {
-        const response = await axios.get(`http://localhost:8082/api/cart/${userId}`, {
+        const response = await axios.get(`${BASE_URL}/cart/${userId}`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -70,7 +71,7 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
     };
 
     try {
-      const response = await axios.post(`http://localhost:8082/api/cart/${userId}/add`, cartItemDTO, {
+      const response = await axios.post(`${BASE_URL}/cart/${userId}/add`, cartItemDTO, {
         headers: {
           "Content-Type": "application/json",
         },

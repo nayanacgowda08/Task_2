@@ -37,7 +37,7 @@ const EditProductForm = ({ setView, product }) => {
     const productId = product.id;
 
     try {
-      const response = await fetch(`http://localhost:8082/api/user/update/product/${productId}`, {
+      const response = await fetch(`${BASE_URL}/user/update/product/${productId}`, {
         method: "POST",
         body: formData,
       });

@@ -18,7 +18,7 @@ const Navbar = () => {
     <nav className="nav-bar">
       <ul className="left">
         <li><NavLink to={isMerchant ? "/merchant/" : "/user/"}>
-        <i class="ri-store-3-line"></i>{" "}
+        <i className="ri-store-3-line"></i>{" "}
         E-Shop</NavLink></li>
       </ul>
 
@@ -43,17 +43,17 @@ const Navbar = () => {
             <li>
               <NavLink to="/user/orders">
                 {/* <i className="ri-package-2-fill" style={{ fontSize: '24px', color: '#3498db', marginRight: '10px' }}></i>  */}
-                <i class="ri-instance-line"></i>{" "}
+                <i className="ri-instance-line"></i>{" "}
                 Orders
               </NavLink>
             </li>
             <li><NavLink to="/user/profile">
-            <i class="ri-account-circle-line"></i>{" "}
+            <i className="ri-account-circle-line"></i>{" "}
             Profile</NavLink></li>
           </>
         )}
         <li><NavLink to="/" onClick={handleLogout}>
-        <i class="ri-logout-box-line"></i>{" "}
+        <i className="ri-logout-box-line"></i>{" "}
         Logout</NavLink></li>
       </ul>
     </nav>

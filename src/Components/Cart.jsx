@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import "../assets/styles/cart.css";
+import { BASE_URL } from '../Services/helper';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
@@ -8,7 +9,7 @@ const Cart = () => {
 
   const removeFromCart = async (productId) => {
     try {
-      await axios.delete(`http://localhost:8082/api/cart/${userId}/remove/${productId}`);
+      await axios.delete(`${BASE_URL}/cart/${userId}/remove/${productId}`);
       fetchItems();
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -19,7 +20,7 @@ const Cart = () => {
     try {
       const updatedQuantity = currentQuantity + 1;
       const q = { quantity: updatedQuantity };
-      await axios.put(`http://localhost:8082/api/cart/${userId}/update/${productId}`, q, {
+      await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -35,7 +36,7 @@ const Cart = () => {
       
         const updatedQuantity = currentQuantity - 1;
         const q = { quantity: updatedQuantity };
-        await axios.put(`http://localhost:8082/api/cart/${userId}/update/${productId}`, q, {
+        await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -49,7 +50,7 @@ const Cart = () => {
 
   const fetchItems = async () => {
     try {
-      const response = await axios.get(`http://localhost:8082/api/cart/${userId}`);
+      const response = await axios.get(`${BASE_URL}/cart/${userId}`);
       setItems(response.data.items);
     } catch (error) {
       console.error("Error fetching items:", error);
@@ -58,7 +59,7 @@ const Cart = () => {
   const handleBuy=async()=>{
     const userId=localStorage.getItem("userId");
     try {
-      const response = await axios.post(`http://localhost:8082/api/order/buy/${userId}`, {
+      const response = await axios.post(`${BASE_URL}/order/buy/${userId}`, {
         headers: {
           "Content-Type": "application/json",
         },

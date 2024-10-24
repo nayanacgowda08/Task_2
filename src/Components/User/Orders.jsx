@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../Services/helper';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const userId = localStorage.getItem("userId"); // Retrieve user ID from localStorage
-  const apiUrl = `http://localhost:8082/api/order/user/${userId}`;
+  const apiUrl = `${BASE_URL}/order/user/${userId}`;
 
   useEffect(() => {
     // Fetch orders using Axios

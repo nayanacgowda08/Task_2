@@ -46,7 +46,7 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
           setInCart(productInCart); // Set the inCart state accordingly
         }
       } catch (error) {
-        console.error("Error fetching cart items:", error);
+        console.error("Error fetching cart items:");
       }
     };
 

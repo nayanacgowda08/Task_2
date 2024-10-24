@@ -55,19 +55,34 @@ const Cart = () => {
       console.error("Error fetching items:", error);
     }
   };
+  const handleBuy=async()=>{
+    const userId=localStorage.getItem("userId");
+    try {
+      const response = await axios.post(`http://localhost:8082/api/order/buy/${userId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Order created:", response.data);
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
+  }
 
   useEffect(() => {
     fetchItems();
-  }, [userId]);
+  }, [userId,handleBuy]);
 
   // Calculate total items and total price
-  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
-  const totalPrice = items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+  const totalItems = items && items.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = items && items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+
+
 
   return (
     <div className="cart-container">
       <h2 style={{ textAlign: "center" }}>Cart Items</h2>
-      {items && items.length === 0 ? (
+      {items==null||(items && items.length === 0) ? (
         <p>Your cart is empty</p>
       ) : (
         <div>
@@ -83,7 +98,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {items.map((item, index) => (
+              {items&&items.map((item, index) => (
                 <tr key={index}>
                   <td>
                     <img
@@ -126,9 +141,9 @@ const Cart = () => {
           </table>
         </div>
       )}
-      {items.length > 0 && (
+      {items && items.length > 0 && (
         <div className="buy">
-          <button>Buy now</button>
+          <button onClick={handleBuy}>Buy now</button>
           <span className="total-price">Total: Rs.{totalPrice.toFixed(2)}</span>
         </div>
       )}

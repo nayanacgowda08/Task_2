@@ -61,7 +61,7 @@ const AddProductForm = ({ setView }) => {
     formData.append("categoryId", category);
 
     try {
-      const response = await fetch(`http://localhost:8082/api/service/merchant/${merchantId}/upld`, {
+      const response = await fetch(`${BASE_URL}/service/merchant/${merchantId}/upld`, {
         method: 'POST',
         body: formData,
       });

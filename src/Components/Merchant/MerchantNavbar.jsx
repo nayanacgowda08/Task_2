@@ -1,4 +1,4 @@
-import "../../assets/styles/merchantNavbar.css"
+// import "../../assets/styles/merchantNavbar.css"
 import Navbar from "../Navbar";
 
 

@@ -1,66 +1,72 @@
-
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .nav-bar {
-    background-color: #76afeb; 
-    padding: 0.5rem;
-  }
-  
-  nav ul {
-    list-style-type: none; 
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between; 
-  }
-  
- 
-  nav ul li {
-    margin: 0 10px;
-  }
-  
-  nav ul li a {
-    color: #ecf0f1;
-    text-decoration: none; 
-    /* padding: 10px 20px;  */
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 5px;
-  }
-  
-  nav ul li a:hover {
-    /* background-color: #2980b9; */
-    color: white; 
+  background-color: #bcbfbf; /* Minimal background */
+  padding: 0.75rem 2rem; /* More padding for spacing */
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically center the items */
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  margin: 0 15px; /* Space between nav items */
+}
+
+nav ul li a {
+  color: #2c3e50; /* Neutral color */
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  color: #146eaa;
+}
+
+/* Specific section alignments */
+.left {
+  margin-right: auto; /* Aligns E-Shop to the left */
+}
+
+.right {
+  display: flex;
+  gap: 20px; /* Space between right-side items */
+}
+
+nav ul li a.active {
+  color: #272a2d; /* Active link color */
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
   }
 
-  .right{
-    display: flex;
-    /* background-color: red; */
-    /* gap: 5px; */
+  nav ul {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  nav ul li a.active {
-    /* background-color: #3498db;  */
-    text-decoration: underline;
-    color: white; 
+
+  nav ul li {
+    margin: 10px 0;
   }
-  nav ul li a.no-active.active {
-    background-color: initial; 
-    color: white; 
+
+  .right {
+    margin-top: 1rem;
   }
-  
-  @media (max-width: 768px) {
-    nav ul {
-      flex-direction: column; 
-      align-items: center;
-    }
-  
-    nav ul li {
-      margin: 10px 0;
-    }
-  }
-  
+}

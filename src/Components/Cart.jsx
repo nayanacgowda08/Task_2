@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { motion } from 'framer-motion'; // Import motion for animations
 import "../assets/styles/cart.css";
 import { BASE_URL } from '../Services/helper';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(""); // State for the success message
   const userId = localStorage.getItem("userId");
 
   const removeFromCart = async (productId) => {
@@ -33,16 +35,14 @@ const Cart = () => {
 
   const decreaseQuantity = async (productId, currentQuantity) => {
     try {
-      
-        const updatedQuantity = currentQuantity - 1;
-        const q = { quantity: updatedQuantity };
-        await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        fetchItems();
-      
+      const updatedQuantity = currentQuantity - 1;
+      const q = { quantity: updatedQuantity };
+      await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      fetchItems();
     } catch (error) {
       console.error("Error updating quantity:", error);
     }
@@ -56,8 +56,9 @@ const Cart = () => {
       console.error("Error fetching items:", error);
     }
   };
-  const handleBuy=async()=>{
-    const userId=localStorage.getItem("userId");
+
+  const handleBuy = async () => {
+    const userId = localStorage.getItem("userId");
     try {
       const response = await axios.post(`${BASE_URL}/order/buy/${userId}`, {
         headers: {
@@ -65,10 +66,14 @@ const Cart = () => {
         },
       });
       console.log("Order created:", response.data);
+      setSuccessMessage("You have purchased successfully!"); // Set the success message
+      setTimeout(() => {
+        setSuccessMessage(""); // Clear the message after 3 seconds
+      }, 3000);
     } catch (error) {
       console.error("Error creating order:", error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchItems();
@@ -78,12 +83,10 @@ const Cart = () => {
   const totalItems = items && items.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = items && items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
 
-
-
   return (
     <div className="cart-container">
       <h2 style={{ textAlign: "center" }}>Cart Items</h2>
-      {items==null||(items && items.length === 0) ? (
+      {items == null || (items && items.length === 0) ? (
         <p>Your cart is empty</p>
       ) : (
         <div>
@@ -99,7 +102,7 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {items&&items.map((item, index) => (
+              {items && items.map((item, index) => (
                 <tr key={index}>
                   <td>
                     <img
@@ -144,9 +147,29 @@ const Cart = () => {
       )}
       {items && items.length > 0 && (
         <div className="buy">
-          <button onClick={handleBuy}>Buy now</button>
+          <motion.button
+            onClick={handleBuy}
+            whileHover={{ scale: 1.1 }} // Scale on hover
+            whileTap={{ scale: 0.9 }}   // Scale down on click
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            Buy now
+          </motion.button>
           <span className="total-price">Total: Rs.{totalPrice.toFixed(2)}</span>
         </div>
+      )}
+
+      {/* Success Message with Animation */}
+      {successMessage && (
+        <motion.div
+          className="success-message" // Add your CSS class here
+          initial={{ opacity: 0, y: -20 }} // Start with opacity 0 and slightly moved up
+          animate={{ opacity: 1, y: 0 }} // Fade in and move to original position
+          exit={{ opacity: 0, y: -20 }} // Fade out and move up
+          transition={{ duration: 0.5 }} // Transition duration
+        >
+          {successMessage}
+        </motion.div>
       )}
     </div>
   );

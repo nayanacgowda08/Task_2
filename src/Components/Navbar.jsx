@@ -25,10 +25,14 @@ const Navbar = () => {
       <ul className="right">
         {isMerchant ? (
           <>
-            <li><NavLink to="/merchant/products">Products</NavLink></li>
-            <li><NavLink to="/merchant/orders">Orders</NavLink></li>
-            <li><NavLink to="/merchant/analytics">Analytics</NavLink></li>
-            <li><NavLink to="/merchant/profile">Profile</NavLink></li>
+            <li><NavLink to="/merchant/products"><i className="ri-file-paper-line"></i>{" "}Products</NavLink></li>
+            <li><NavLink to="/merchant/orders"> <i className="ri-instance-line"></i>{" "}
+            Orders</NavLink></li>
+            <li><NavLink to="/merchant/analytics">
+            <i class="ri-bar-chart-grouped-line"></i>{" "}Analytics</NavLink></li>
+            <li><NavLink to="/merchant/profile">
+            <i className="ri-account-circle-line"></i>{" "}
+            Profile</NavLink></li>
           </>
         ) : (
           <>

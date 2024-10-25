@@ -5,11 +5,14 @@
 }
 
 .nav-bar {
-  background-color: #bcbfbf; /* Minimal background */
+  background-color: #d8dbdb; /* Minimal background */
   padding: 0.75rem 2rem; /* More padding for spacing */
   display: flex;
   justify-content: space-between;
   align-items: center; /* Vertically center the items */
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  z-index: 1;
+
 }
 
 nav ul {
@@ -18,6 +21,7 @@ nav ul {
   padding: 0;
   display: flex;
   align-items: center;
+  /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
 }
 
 nav ul li {
@@ -27,14 +31,15 @@ nav ul li {
 nav ul li a {
   color: #2c3e50; /* Neutral color */
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: bold;
   transition: background-color 0.3s, color 0.3s;
   border-radius: 5px;
 }
 
 nav ul li a:hover {
-  color: #146eaa;
+  /* color: #146eaa; */
+  text-decoration: underline;
 }
 
 /* Specific section alignments */

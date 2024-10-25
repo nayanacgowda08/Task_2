@@ -28,7 +28,7 @@ const Products_Display = () => {
   console.log(products)
 
   return (
-    <div className="product-list">
+    <div className="product">
       {products.map((product) => {
         //const { id, category, description, image, price, title } = product;
         const {productId,category,description,file,price,name, stock, rating, merchantId, usp}=product;

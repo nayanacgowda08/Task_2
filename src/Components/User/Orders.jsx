@@ -1,94 +1,82 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../Services/helper';
+import "../../assets/styles/orders.css";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const userId = localStorage.getItem("userId"); // Retrieve user ID from localStorage
+  const userId = localStorage.getItem('userId'); 
   const apiUrl = `${BASE_URL}/order/user/${userId}`;
 
   useEffect(() => {
-    // Fetch orders using Axios
+    
     const fetchOrders = async () => {
       try {
         const response = await axios.get(apiUrl);
-        setOrders(response.data); // Assuming the API returns the order data in response.data
+        setOrders(response.data); 
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error('Error fetching orders:', error);
       }
     };
 
-    fetchOrders(); // Call the function when the component mounts
-  }, [userId]);
+    fetchOrders(); 
+    
+  }, [apiUrl]);
 
   return (
     <div className="orders-page">
-      <h3 style={{ textAlign: "center", margin: "10px 10px" }}>My Orders</h3>
+      <h3 style={{ textAlign: 'center', margin: '20px' }}>My Orders</h3>
 
-      {/* Main Content */}
+      
       <div className="orders-content">
-        <table className="orders-table">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Product</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Status</th>
-              <th>Total Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.length > 0 ? (
-              orders.map((order) => (
-                <>
-                  {/* Display Order details (one row for the order) */}
-                  <tr key={order.orderId}>
-                    <td rowSpan={order.products.length}>{order.orderId}</td>
-                    <td>
-                      <img
-                        style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "5px" }}
-                        src={order.products[0].file}
-                        alt={order.products[0].productName}
-                      />{' '}
-                      {order.products[0].productName}
-                    </td>
-                    <td>{order.products[0].category}</td>
-                    <td>${order.products[0].price}</td>
-                    <td>{order.products[0].quantity}</td>
-                    <td>{order.status}</td>
-                    <td rowSpan={order.products.length}>${order.totalPrice}</td>
-                  </tr>
+        {orders.length > 0 ? (
+          orders.map((order) => (
+            <div key={order.orderId}>
+              
+              
+              <div className="order-id" style={{ marginBottom: '10px' }}>
+                <strong>Order ID:</strong> {order.orderId}
+              </div>
+              
+              <div className="order-card">
+               
+                {order.products.map((product) => (
+                  <div className="order-details" key={product.productId}>
+                    <img
+                      className="product-image"
+                      src={product.file}
+                      alt={product.productName}
+                    />
+                    <div className="product-info">
+                    
+                      <div className="left-info">
+                        <h4>{product.productName}</h4>
+                        <h5>{product.category}</h5>
+                      </div>
 
-                  {/* Display remaining products (if any) */}
-                  {order.products.slice(1).map((product) => (
-                    <tr key={product.productId}>
-                      <td>
-                        <img
-                          style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "5px" }}
-                          src={product.file}
-                          alt={product.productName}
-                        />{' '}
-                        {product.productName}
-                      </td>
-                      <td>{product.category}</td>
-                      <td>${product.price}</td>
-                      <td>{product.quantity}</td>
-                      <td>{order.status}</td>
-                    </tr>
-                  ))}
-                </>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="7" style={{ textAlign: "center" }}>
-                  No orders found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                    
+                      <div className="middle-info">
+                        ₹{""}{product.price}
+                      </div>
+
+                    
+                      <div
+                        className="right-info"
+                        style={{
+                          color: order.status === 'PENDING' ? 'orange' : 'green',
+                        }}
+                      >
+                        {order.status}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No orders found</p>
+        )}
       </div>
     </div>
   );

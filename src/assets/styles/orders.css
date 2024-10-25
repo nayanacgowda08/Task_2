@@ -1,89 +1,91 @@
+/* Orders Page */
 .orders-page {
-    display: flex;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: #f1f3f6;
-  }
-  
-  /* Sidebar */
-  .sidebar {
-    width: 20%;
-    background-color: #fff;
-    padding: 20px;
-    border-right: 1px solid #ddd;
-  }
-  
-  .sidebar h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 10px 0;
-    cursor: pointer;
-    font-size: 16px;
-    color: #3b5998;
-    transition: background 0.3s;
-  }
-  
-  .sidebar ul li:hover {
-    background-color: #f1f3f6;
-    padding-left: 10px;
-  }
-  
-  /* Main Content */
-  .orders-content {
-    width: 80%;
-    padding: 20px;
-  }
-  
-  /* Table Styling */
-  .orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .orders-table thead {
-    background-color: #2874f0;
-    color: white;
-  }
-  
-  .orders-table th,
-  .orders-table td {
-    text-align: left;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-  }
-  
-  .orders-table td img.product-image img{
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-  
-  .orders-table tr:hover {
-    background-color: #f1f3f6;
-  }
-  
-  .orders-table td {
-    color: #333;
-  }
-  
-  .orders-table th {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
-  .orders-table td {
-    font-size: 14px;
-  }
-  
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  gap: 20px;
+  width: 60%; /* Adjust width to make card bigger */
+}
+
+/* Order Card Style */
+.order-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Order Details (Horizontal Layout for Image and Info) */
+.order-details {
+  display: flex;
+  align-items: center; /* Align items at the center */
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+/* Product Image */
+.product-image {
+  width: 120px; /* Adjust the image size */
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+/* Product Info */
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center; /* Vertically center the content */
+}
+
+/* Left section with product name and category */
+.left-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-info h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.left-info h5 {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #777; /* Lighter color for category */
+}
+
+/* Price in the middle */
+.middle-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  /* text-align: center; */
+}
+
+/* Status at the end */
+.right-info {
+  font-size: 14px;
+  font-weight: bold;
+  color: green;
+  text-align: right;
+}

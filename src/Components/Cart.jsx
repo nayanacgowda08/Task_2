@@ -18,9 +18,13 @@ const Cart = () => {
     }
   };
 
-  const increaseQuantity = async (productId, currentQuantity) => {
+  const increaseQuantity = async (itemquantity,productId, currentQuantity) => {
     try {
       const updatedQuantity = currentQuantity + 1;
+      if(itemquantity<updatedQuantity){
+
+        return;
+      }
       const q = { quantity: updatedQuantity };
       await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
         headers: {
@@ -124,7 +128,7 @@ const Cart = () => {
                       <span>{item.quantity}</span>
                       <button
                         className="quantity-btn"
-                        onClick={() => increaseQuantity(item.productId, item.quantity)}
+                        onClick={() => increaseQuantity(item.productStock,item.productId, item.quantity)}
                       >
                         +
                       </button>

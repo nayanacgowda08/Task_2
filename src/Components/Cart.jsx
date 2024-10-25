@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { motion } from 'framer-motion'; // Import motion for animations
+import { motion, AnimatePresence } from 'framer-motion';
 import "../assets/styles/cart.css";
 import { BASE_URL } from '../Services/helper';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
-  const [successMessage, setSuccessMessage] = useState(""); // State for the success message
+  const [successMessage, setSuccessMessage] = useState("");
+  const [stockWarning, setStockWarning] = useState({});
   const userId = localStorage.getItem("userId");
 
   const removeFromCart = async (productId) => {
@@ -18,13 +19,21 @@ const Cart = () => {
     }
   };
 
-  const increaseQuantity = async (itemquantity,productId, currentQuantity) => {
+  const increaseQuantity = async (itemStock, productId, currentQuantity) => {
     try {
       const updatedQuantity = currentQuantity + 1;
-      if(itemquantity<updatedQuantity){
-
+      if (itemStock < updatedQuantity) {
+        setStockWarning((prevWarnings) => ({
+          ...prevWarnings,
+          [productId]: "Out of stock",
+        }));
         return;
       }
+      setStockWarning((prevWarnings) => ({
+        ...prevWarnings,
+        [productId]: "",
+      }));
+      
       const q = { quantity: updatedQuantity };
       await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
         headers: {
@@ -62,7 +71,6 @@ const Cart = () => {
   };
 
   const handleBuy = async () => {
-    const userId = localStorage.getItem("userId");
     try {
       const response = await axios.post(`${BASE_URL}/order/buy/${userId}`, {
         headers: {
@@ -70,20 +78,26 @@ const Cart = () => {
         },
       });
       console.log("Order created:", response.data);
-      setSuccessMessage("You have purchased successfully!"); // Set the success message
+  
+      // Clear the cart items after successful purchase
+      setItems([]); // Empty the items array immediately
+      setSuccessMessage("You have purchased successfully!");
+  
+      // Clear the success message after 3 seconds
       setTimeout(() => {
-        setSuccessMessage(""); // Clear the message after 3 seconds
+        setSuccessMessage("");
       }, 3000);
     } catch (error) {
       console.error("Error creating order:", error);
     }
+    
   };
+  
 
   useEffect(() => {
     fetchItems();
-  }, [userId,handleBuy]);
+  }, [userId,handleBuy]); // fetch items on initial mount only
 
-  // Calculate total items and total price
   const totalItems = items && items.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = items && items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
 
@@ -122,16 +136,21 @@ const Cart = () => {
                       <button
                         className="quantity-btn"
                         onClick={() => decreaseQuantity(item.productId, item.quantity)}
+                        disabled={item.quantity <= 1}
                       >
                         -
                       </button>
                       <span>{item.quantity}</span>
                       <button
                         className="quantity-btn"
-                        onClick={() => increaseQuantity(item.productStock,item.productId, item.quantity)}
+                        onClick={() => increaseQuantity(item.productStock, item.productId, item.quantity)}
+                        disabled={item.quantity >= item.productStock}
                       >
                         +
                       </button>
+                      {stockWarning[item.productId] && (
+                        <span className="stock-warning">{stockWarning[item.productId]}</span>
+                      )}
                     </div>
                   </td>
                   <td>Rs.{item.productPrice}</td>
@@ -153,8 +172,8 @@ const Cart = () => {
         <div className="buy">
           <motion.button
             onClick={handleBuy}
-            whileHover={{ scale: 1.1 }} // Scale on hover
-            whileTap={{ scale: 0.9 }}   // Scale down on click
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             Buy now
@@ -163,18 +182,19 @@ const Cart = () => {
         </div>
       )}
 
-      {/* Success Message with Animation */}
-      {successMessage && (
-        <motion.div
-          className="success-message" // Add your CSS class here
-          initial={{ opacity: 0, y: -20 }} // Start with opacity 0 and slightly moved up
-          animate={{ opacity: 1, y: 0 }} // Fade in and move to original position
-          exit={{ opacity: 0, y: -20 }} // Fade out and move up
-          transition={{ duration: 0.5 }} // Transition duration
-        >
-          {successMessage}
-        </motion.div>
-      )}
+<AnimatePresence>
+        {successMessage && (
+          <motion.div
+            className="success-message"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 150 }}
+          >
+            {successMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

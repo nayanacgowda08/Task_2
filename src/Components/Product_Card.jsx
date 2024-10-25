@@ -8,10 +8,9 @@ import { BASE_URL } from '../Services/helper';
 const Product_Card = ({ id, category, description, image, price, title, stock, rating, merchantId, usp }) => {
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext); 
-  const [inCart, setInCart] = useState(false); // State to track if product is in the cart
-  const userId = localStorage.getItem("userId"); // Get the current user ID
+  const [inCart, setInCart] = useState(false);
+  const userId = localStorage.getItem("userId");
 
-  // Fetch the cart items for the logged-in user
   const handleViewDetails = () => {
     navigate(`/detail/${id}`, {
       state: {
@@ -41,20 +40,18 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
         });
 
         if (response.status === 200) {
-          
-          const cartItems = response.data.items; // Assuming the API returns an array of cart items
-          const productInCart = cartItems.some(item => item.productId === id); // Check if the product is in the cart
-          setInCart(productInCart); // Set the inCart state accordingly
+          const cartItems = response.data.items;
+          const productInCart = cartItems.some(item => item.productId === id);
+          setInCart(productInCart);
         }
       } catch (error) {
-        console.error("Error fetching cart items:");
+        console.error("Error fetching cart items:", error);
       }
     };
 
     fetchCartItems();
-  }, [id, userId]); // Effect runs when `id` or `userId` changes
+  }, [id, userId]);
 
-  // Navigate to the cart page
   const handleGoToCart = () => {
     navigate('/user/cart');
   };
@@ -78,8 +75,7 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
       });
 
       if (response.status === 200 || response.status === 201) {
-        console.log(response.data);
-        setInCart(true); // Mark the product as in the cart after adding it
+        setInCart(true);
       } else {
         console.error("Failed to add product to cart.");
       }
@@ -90,33 +86,38 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
 
   return (
     <div className="product-card">
-    <div className="card-image" style={{ backgroundImage: `url(${image})` }} />
-    <div className="card-content">
+      <div className="card-image" style={{ backgroundImage: `url(${image})` }} />
+      <div className="card-content">
         <h4>{title}</h4>
         <div className="rating">
-            {Array(rating).fill().map((_, i) => (
-                <span key={i}>⭐</span>
-            ))}
+          {Array(rating).fill().map((_, i) => (
+            <span key={i}>⭐</span>
+          ))}
         </div>
         <p className="category">{category}</p>
         <p className="description">{description}</p>
         <p className="price">${price}</p>
         {stock > 0 ? (
-            <span className="in-stock">In Stock</span>
+          <span className="in-stock">In Stock</span>
         ) : (
-            <span className="out-of-stock">Out of Stock</span>
+          <span className="out-of-stock">Out of Stock</span>
         )}
         <div className="btn-flex">
-            {inCart ? (
-                <button className="go-to-cart" onClick={handleGoToCart}>Go to Cart</button>
-            ) : (
-                <button className="add-to-cartt" onClick={handleAddToCart}>Add to Cart</button>
-            )}
-            <button className="view-detailss" onClick={handleViewDetails}>View Details</button>
+          {inCart ? (
+            <button className="go-to-cart" onClick={handleGoToCart}>Go to Cart</button>
+          ) : (
+            <button
+              className="add-to-cartt"
+              onClick={handleAddToCart}
+              disabled={stock === 0} // Disable if stock is 0
+            >
+              Add to Cart
+            </button>
+          )}
+          <button className="view-detailss" onClick={handleViewDetails}>View Details</button>
         </div>
+      </div>
     </div>
-</div>
-
   );
 };
 

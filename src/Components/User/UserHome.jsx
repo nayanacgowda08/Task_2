@@ -16,11 +16,7 @@ const UserHome = () => {
   return (
     <>
     <Banner/>
-    <h1 style={{
-        marginTop: '50px',
-        textAlign: 'center'
-      }}
-    >Products List</h1>
+    <br />
     <Products_Display/>
     </>
   )

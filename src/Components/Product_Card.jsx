@@ -90,10 +90,14 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
       <div className="card-content">
         <h4>{title}</h4>
         <div className="rating">
-          {Array(rating).fill().map((_, i) => (
-            <span key={i}>⭐</span>
-          ))}
-        </div>
+  {Array(Math.floor(rating)).fill().map((_, i) => (
+    <span key={i}>⭐</span>
+  ))}
+  {rating % 1 !== 0 && <span>⭐️</span>}
+  {Array(5 - Math.ceil(rating)).fill().map((_, i) => (
+    <span key={i + Math.floor(rating) + 1}>☆</span>
+  ))}
+</div>
         <p className="category">{category}</p>
         <p className="description">{description}</p>
         <p className="price">${price}</p>

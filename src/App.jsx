@@ -7,6 +7,7 @@ import MerchantPage from "./Components/Merchant/MerchantPage";
 import Details from "./Components/details";
 
 import ProductSuggest from "./Components/ProductSuggest";
+import MerchantOrders from "./Components/Merchant/MerchantOrders";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route  element={<MerchantPage />} path="/merchant/*" />
         <Route  element={<Details/>} path="/detail/:id" />
         <Route path="/product/:id" element={<ProductSuggest />} />
+        {/* <Route path="/merchant/getallorders" element={<MerchantOrders/>}/> */}
       </Routes>
     </Router>
   );

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/styles/productdetail.css";
 import { BASE_URL } from "../Services/helper";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; // Import star icons
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -76,6 +77,21 @@ const ProductDetails = () => {
     navigate("/user/cart");
   };
 
+
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= Math.floor(rating)) {
+        stars.push(<FaStar key={i} className="star" />);
+      } else if (i - rating < 1) {
+        stars.push(<FaStarHalfAlt key={i} className="star" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="empty-star" />);
+      }
+    }
+    return stars;
+  };
+
   return (
     <div className="product-details-container">
       <div className="selected-product">
@@ -87,11 +103,22 @@ const ProductDetails = () => {
         <div className="selected-product-info">
           <h2>{selectedProduct.name}</h2>
           <p>{selectedProduct.description}</p>
-          <p>Price: ${selectedProduct.price}</p>
-          <p>
-            Rating: {selectedProduct.productRating} ({selectedProduct.ratingCount} reviews)
-          </p>
-          <p>Merchant: {selectedProduct.merchantName}</p>
+          <p className="price">Price: ${selectedProduct.price}</p>
+
+          {/* Updated Rating Section */}
+          <div className="rating-container">
+            <div className="star-rating">
+              {renderStars(selectedProduct.productRating)}
+            </div>
+            <span className="rating-text">
+              {selectedProduct.productRating} / 5
+            </span>
+            <span className="review-count">
+              ({selectedProduct.ratingCount} reviews)
+            </span>
+          </div>
+
+          <p className="merchant">Merchant: {selectedProduct.merchantName}</p>
 
           {/* Display "Out of Stock" if stock is 0 or below */}
           {selectedProduct.stock <= 0 ? (

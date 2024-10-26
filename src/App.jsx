@@ -6,6 +6,8 @@ import UserPage from "./Components/User/UserPage";
 import MerchantPage from "./Components/Merchant/MerchantPage";
 import Details from "./Components/details";
 
+import ProductSuggest from "./Components/ProductSuggest";
+
 
 function App() {
  
@@ -19,6 +21,7 @@ function App() {
         <Route  element={<UserPage />} path="/user/*" />
         <Route  element={<MerchantPage />} path="/merchant/*" />
         <Route  element={<Details/>} path="/detail/:id" />
+        <Route path="/product/:id" element={<ProductSuggest />} />
       </Routes>
     </Router>
   );

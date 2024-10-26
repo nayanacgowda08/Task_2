@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
 import "../assets/styles/top.css"; 
 import { BASE_URL } from "../Services/helper";
+import { FaSearch } from "react-icons/fa"; // Import search icon from react-icons
 
 const Banner = () => {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
-  // Function to fetch product suggestions from the API
   const fetchSuggestions = async (inputValue) => {
     try {
       const response = await fetch(`${BASE_URL}/user/search?name=${inputValue}`);
       const data = await response.json();
-      return data; // Assuming data is an array of product objects
+      return data;
     } catch (error) {
       console.error("Error fetching suggestions:", error);
       return [];
@@ -27,7 +27,6 @@ const Banner = () => {
       return [];
     }
 
-    // Fetching suggestions from the API
     const fetchedSuggestions = await fetchSuggestions(inputValue);
     
     return fetchedSuggestions.filter(
@@ -51,27 +50,31 @@ const Banner = () => {
   };
 
   const inputProps = {
-    placeholder: "Search for products...",
+    placeholder: "Search for Products...",
     value,
     onChange,
-    className: "search-input",
+    className: "banner-search-input",
   };
-console.log(value);
 
   return (
-    <div className="search-container">
+    <div className="banner-search-container">
+      <FaSearch className="banner-search-icon" /> {/* Search icon */}
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={(suggestion) => (
-          <div className="suggestion-item">
-            <img src={suggestion.file} alt={suggestion.name} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
+          <div className="banner-suggestion-item">
+            <img src={suggestion.file} alt={suggestion.name} />
             {suggestion.name}
           </div>
         )}
         inputProps={inputProps}
+        theme={{
+          suggestionsList: "banner-suggestions-list",
+          suggestion: "banner-suggestion-item",
+        }}
       />
     </div>
   );

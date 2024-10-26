@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import Banner from '../Banner'
 import Products_Display from '../Products_Display'
 import { useNavigate } from 'react-router-dom';
+import Categories from './Categories';
 
 const UserHome = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const UserHome = () => {
   return (
     <>
     <Banner/>
+    <br />
+    <Categories/>
     <br />
     <Products_Display/>
     </>

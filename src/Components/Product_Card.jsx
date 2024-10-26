@@ -1,13 +1,24 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../assets/styles/productCard.css";
-import { CartContext } from '../context/CartContext'; 
-import axios from 'axios';
-import { BASE_URL } from '../Services/helper';
+import { CartContext } from "../context/CartContext";
+import axios from "axios";
+import { BASE_URL } from "../Services/helper";
 
-const Product_Card = ({ id, category, description, image, price, title, stock, rating, merchantId, usp }) => {
+const Product_Card = ({
+  id,
+  category,
+  description,
+  image,
+  price,
+  title,
+  stock,
+  rating,
+  merchantId,
+  usp,
+}) => {
   const navigate = useNavigate();
-  const { addToCart } = useContext(CartContext); 
+  const { addToCart } = useContext(CartContext);
   const [inCart, setInCart] = useState(false);
   const userId = localStorage.getItem("userId");
 
@@ -23,14 +34,14 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
         stock,
         rating,
         merchantId,
-        usp
-      }
+        usp,
+      },
     });
   };
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      if (!userId) return; 
+      if (!userId) return;
 
       try {
         const response = await axios.get(`${BASE_URL}/cart/${userId}`, {
@@ -41,7 +52,7 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
 
         if (response.status === 200) {
           const cartItems = response.data.items;
-          const productInCart = cartItems.some(item => item.productId === id);
+          const productInCart = cartItems.some((item) => item.productId === id);
           setInCart(productInCart);
         }
       } catch (error) {
@@ -53,7 +64,7 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
   }, [id, userId]);
 
   const handleGoToCart = () => {
-    navigate('/user/cart');
+    navigate("/user/cart");
   };
 
   const handleAddToCart = async () => {
@@ -68,11 +79,15 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
     };
 
     try {
-      const response = await axios.post(`${BASE_URL}/cart/${userId}/add`, cartItemDTO, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        `${BASE_URL}/cart/${userId}/add`,
+        cartItemDTO,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 200 || response.status === 201) {
         setInCart(true);
@@ -86,18 +101,25 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
 
   return (
     <div className="product-card">
-      <div className="card-image" style={{ backgroundImage: `url(${image})` }} />
+      <div
+        className="card-image"
+        style={{ backgroundImage: `url(${image})` }}
+      />
       <div className="card-content">
         <h4>{title}</h4>
         <div className="rating">
-  {Array(Math.floor(rating)).fill().map((_, i) => (
-    <span key={i}>⭐</span>
-  ))}
-  {rating % 1 !== 0 && <span>⭐️</span>}
-  {Array(5 - Math.ceil(rating)).fill().map((_, i) => (
-    <span key={i + Math.floor(rating) + 1}>☆</span>
-  ))}
-</div>
+          {Array(Math.floor(rating))
+            .fill()
+            .map((_, i) => (
+              <span key={i}>⭐</span>
+            ))}
+          {rating % 1 !== 0 && <span>⭐️</span>}
+          {Array(5 - Math.ceil(rating))
+            .fill()
+            .map((_, i) => (
+              <span key={i + Math.floor(rating) + 1}>☆</span>
+            ))}
+        </div>
         <p className="category">{category}</p>
         <p className="description">{description}</p>
         <p className="price">${price}</p>
@@ -108,7 +130,9 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
         )}
         <div className="btn-flex">
           {inCart ? (
-            <button className="go-to-cart" onClick={handleGoToCart}>Go to Cart</button>
+            <button className="go-to-cart" onClick={handleGoToCart}>
+              Go to Cart
+            </button>
           ) : (
             <button
               className="add-to-cartt"
@@ -118,7 +142,9 @@ const Product_Card = ({ id, category, description, image, price, title, stock, r
               Add to Cart
             </button>
           )}
-          <button className="view-detailss" onClick={handleViewDetails}>View Details</button>
+          <button className="view-detailss" onClick={handleViewDetails}>
+            View Details
+          </button>
         </div>
       </div>
     </div>

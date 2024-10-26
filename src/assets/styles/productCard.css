@@ -49,11 +49,6 @@
 .btn-flex .view-detailss {
     width: 45%; /* Keep buttons in the same position with wider cards */
     font-size: 12px; /* Adjust button font size */
-    border: 2px solid black;
-    padding: 3px;
-    border-radius: 10px;
-    background-color: #93b8ca;
-    cursor: pointer;
 }
 
 .product-card:hover {

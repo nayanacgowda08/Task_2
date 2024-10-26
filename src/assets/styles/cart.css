@@ -76,6 +76,15 @@
 .delete-btn:hover {
   background-color: #c0392b;
 }
+.buy-button{
+  padding: 5px 10px;
+  background-color: #166128;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 
 .buy{
   margin-top: 20px;
@@ -100,3 +109,6 @@
   margin-left: 10px;
 }
 
+.total-price{
+  margin-left: 10px;
+}

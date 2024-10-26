@@ -1,43 +1,50 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaShippingFast, FaUndo, FaMoneyBillAlt } from 'react-icons/fa'; // Importing icons
-import "../assets/styles/details.css"; // Ensure to style accordingly
-import { useEffect } from 'react';
+import { FaShippingFast, FaUndo, FaMoneyBillAlt } from 'react-icons/fa';
+import "../assets/styles/details.css";
+import { CartContext } from '../context/CartContext';
+import Navbar from './Navbar';
 
 const Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
+  const [isInCart, setIsInCart] = useState(false);
 
-  // Redirect to homepage if location.state is null
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (!userId || !location.state) {
-      navigate('/'); // Redirect if user is not logged in or state is missing
+      navigate('/');
     }
   }, [navigate, location.state]);
 
   if (!location.state) {
-    return <p>Loading or redirecting...</p>; // Optional: Display a loading message or redirect
+    return <p>Loading or redirecting...</p>;
   }
 
-  const { id, category, description, image, price, title, stock, rating, merchantId, usp } = location.state;
+  const { id, category, description, image, price, title, stock, rating } = location.state;
 
+  const handleAddToCart = () => {
+    addToCart({ id, title, price, stock, image });
+    setIsInCart(true);  // Set state to show "Go to Cart"
+  };
+
+  const handleGoToCart = () => {
+    navigate('/user/cart');  // Redirect to the cart page
+  };
 
   return (
+    <>
+     <Navbar/>
     <div className="details-container">
       <div className="details-card">
-        {/* Product Image Section */}
         <div className="details-image-container">
           <img src={image} alt={title} className="details-image" />
         </div>
-
-        {/* Product Info Section */}
         <div className="details-info">
           <h2 className="details-title">{title}</h2>
           <p className="details-description">{description}</p>
 
-          {/* Product Details */}
           <div className="product-details">
             <p className="details-status">
               Status: <span className={stock > 0 ? "in-stock" : "out-of-stock"}>{stock > 0 ? "In Stock" : "Out of Stock"}</span>
@@ -47,21 +54,22 @@ const Details = () => {
             <p className="details-rating">Rating: {rating} ★</p>
           </div>
 
-          {/* Price and Discount */}
           <div className="details-price-section">
             <p className="details-price">Price: Rs {price}</p>
           </div>
 
-          {/* Cart Button Section */}
           <div className="cart-section">
             {stock > 0 ? (
-              <button className="add-to-cart">Add to Cart</button>
+              isInCart ? (
+                <button onClick={handleGoToCart} className="go-to-cart">Go to Cart</button>
+              ) : (
+                <button onClick={handleAddToCart} className="add-to-cart">Add to Cart</button>
+              )
             ) : (
               <button className="out-of-stock-btn" disabled>Out of Stock</button>
             )}
           </div>
 
-          {/* Additional Info Section */}
           <div className="additional-info">
             <div className="additional-option">
               <FaMoneyBillAlt className="icon" />
@@ -79,6 +87,7 @@ const Details = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

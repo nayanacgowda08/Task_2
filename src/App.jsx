@@ -7,6 +7,7 @@ import MerchantPage from "./Components/Merchant/MerchantPage";
 import Details from "./Components/details";
 
 
+
 function App() {
  
 
@@ -19,6 +20,7 @@ function App() {
         <Route  element={<UserPage />} path="/user/*" />
         <Route  element={<MerchantPage />} path="/merchant/*" />
         <Route  element={<Details/>} path="/detail/:id" />
+        
       </Routes>
     </Router>
   );

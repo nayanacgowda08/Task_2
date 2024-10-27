@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import AddProductForm from "./AddProductForm;";
 import EditProductForm from "./EditProductForm";
 import ProductList from "./ProductList"
@@ -6,12 +6,13 @@ import MerchantNavbar from "./MerchantNavbar"
 import "../../assets/styles/MerchantPage.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import MerchantOrders from "./MerchantOrders";
 
 const MerchantPage = () => {
-  const [view, setView] = useState("productList"); 
-  const [editProductId, setEditProductId] = useState({}); 
+  const [view, setView] = useState("productList");
+  const [editProductId, setEditProductId] = useState({});
   console.log(editProductId.name);
-  
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -34,14 +35,18 @@ const MerchantPage = () => {
           />
         );
       case "productList":
-      default:
         return <ProductList setView={setView} setEditProductId={setEditProductId} />;
+      case "getAllOrders":
+        return <MerchantOrders />;
+      default:
+        return null;
+
     }
   };
 
   return (
     <div>
-      <MerchantNavbar />
+      <MerchantNavbar setView={setView} />
       {renderView()}
     </div>
   );

@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "../assets/styles/userNavbar.css";
 import 'remixicon/fonts/remixicon.css';
 
-const Navbar = () => {
+const Navbar = ({setView}) => {
   const navigate = useNavigate();
   let loc = useLocation();
   let path = loc.pathname;
@@ -13,9 +13,11 @@ const Navbar = () => {
     localStorage.removeItem("userId");
     navigate("/");
   };
-
+ const handleProduct=()=>{
+  setView("productList");
+ }
   const handleMerchantOrders = () => {
-    navigate("/merchant/getallorders");
+    setView("getAllOrders");
   };
 
   return (
@@ -31,8 +33,8 @@ const Navbar = () => {
       <ul className="right">
         {isMerchant ? (
           <>
-            <li><NavLink to="/merchant/products"><i className="ri-file-paper-line"></i> Products</NavLink></li>
-            <li><NavLink to="/merchant/getallorders" ><i className="ri-instance-line"></i> Orders</NavLink></li>
+            <li><NavLink to="/merchant/products" onClick={handleProduct}><i className="ri-file-paper-line"></i> Products</NavLink></li>
+            <li><NavLink to="#"onClick={handleMerchantOrders} ><i className="ri-instance-line"></i> Orders</NavLink></li>
             <li><NavLink to="/merchant/analytics"><i className="ri-bar-chart-grouped-line"></i> Analytics</NavLink></li>
             <li><NavLink to="/merchant/profile"><i className="ri-account-circle-line"></i> Profile</NavLink></li>
           </>

@@ -7,8 +7,7 @@ import Categories from './Categories';
 
 const UserHome = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState(null); // State for selected category
-
+  const [selectedCategory, setSelectedCategory] = useState(null); 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (!userId) {
@@ -26,7 +25,7 @@ const UserHome = () => {
       <br />
       <Categories onSelectCategory={handleSelectCategory} />
       <br />
-      <Products_Display selectedCategory={selectedCategory} /> {/* Pass selected category */}
+      <Products_Display selectedCategory={selectedCategory} /> 
     </>
   );
 };

@@ -3,9 +3,149 @@ import axios from 'axios';
 import { BASE_URL } from '../../Services/helper';
 
 // Fetch orders by merchant ID
+const mockOrdersData = [
+    {
+      orderId: 1,
+      products: [
+        {
+          productId: 2,
+          productName: "samsung",
+          price: 100.0,
+          quantity: 1,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729953376/lzm6hybrh3lcou1t6l9a.jpg",
+          description: "descitp",
+          category: "Electronics",
+          rating: 4.3,
+          totalRating: 6
+        }
+      ],
+      totalPrice: 100.0,
+      status: "DELIVERED"
+    },
+    {
+      orderId: 2,
+      products: [
+        {
+          productId: 4,
+          productName: "ip",
+          price: 20.0,
+          quantity: 1,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729955203/qiof25fndxdydfozzjym.jpg",
+          description: "des",
+          category: "Electronics",
+          rating: 3.5,
+          totalRating: 2
+        }
+      ],
+      totalPrice: 20.0,
+      status: "DELIVERED"
+    },
+    {
+      orderId: 3,
+      products: [
+        {
+          productId: 4,
+          productName: "ip",
+          price: 20.0,
+          quantity: 1,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729955203/qiof25fndxdydfozzjym.jpg",
+          description: "des",
+          category: "Electronics",
+          rating: 3.5,
+          totalRating: 2
+        }
+      ],
+      totalPrice: 20.0,
+      status: "DELIVERED"
+    },
+    {
+      orderId: 4,
+      products: [
+        {
+          productId: 5,
+          productName: "pixel",
+          price: 20.0,
+          quantity: 1,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729959920/a0majifnjzsipplueydj.png",
+          description: "description",
+          category: "Electronics",
+          rating: 3.9,
+          totalRating: 7
+        }
+      ],
+      totalPrice: 20.0,
+      status: "PENDING"
+    },
+    {
+      orderId: 5,
+      products: [
+        {
+          productId: 6,
+          productName: "pi2",
+          price: 20.0,
+          quantity: 1,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729959953/ocbrfx1edrbwa1chsjqe.png",
+          description: "descr",
+          category: "Clothes",
+          rating: 4.0,
+          totalRating: 1
+        }
+      ],
+      totalPrice: 20.0,
+      status: "PENDING"
+    },
+    {
+      orderId: 6,
+      products: [
+        {
+          productId: 5,
+          productName: "pixel",
+          price: 20.0,
+          quantity: 1,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729959920/a0majifnjzsipplueydj.png",
+          description: "description",
+          category: "Electronics",
+          rating: 3.9,
+          totalRating: 7
+        },
+        {
+          productId: 6,
+          productName: "pi2",
+          price: 20.0,
+          quantity: 2,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729959953/ocbrfx1edrbwa1chsjqe.png",
+          description: "descr",
+          category: "Clothes",
+          rating: 4.0,
+          totalRating: 1
+        }
+      ],
+      totalPrice: 60.0,
+      status: "DELIVERED"
+    },
+    {
+      orderId: 7,
+      products: [
+        {
+          productId: 6,
+          productName: "pi2",
+          price: 20.0,
+          quantity: 10,
+          file: "http://res.cloudinary.com/dzsm5ypo2/image/upload/v1729959953/ocbrfx1edrbwa1chsjqe.png",
+          description: "descr",
+          category: "Clothes",
+          rating: 4.0,
+          totalRating: 1
+        }
+      ],
+      totalPrice: 200.0,
+      status: "PENDING"
+    }
+  ];
 export const fetchOrdersByMerchant = async (merchantId) => {
-  const response = await axios.get(`${BASE_URL}/order/merchant/${merchantId}`);
-  return response.data;
+  //const response = await axios.get(`${BASE_URL}/order/merchant/${merchantId}`);
+//   return response.data;
+return mockOrdersData;
 };
 
 // Update order status to delivered

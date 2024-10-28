@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 import "../assets/styles/cart.css";
-import { BASE_URL } from '../Services/helper';
+import { BASE_URL } from "../Services/helper";
 
 const Cart = () => {
   const [items, setItems] = useState([]);
@@ -12,8 +12,10 @@ const Cart = () => {
 
   const removeFromCart = async (productId) => {
     try {
+      setItems((prevItems) =>
+        prevItems.filter((item) => item.productId !== productId)
+      ); // Remove item optimistically
       await axios.delete(`${BASE_URL}/cart/${userId}/remove/${productId}`);
-      fetchItems();
     } catch (error) {
       console.error("Error removing item from cart:", error);
     }
@@ -33,7 +35,7 @@ const Cart = () => {
         ...prevWarnings,
         [productId]: "",
       }));
-      
+
       const q = { quantity: updatedQuantity };
       await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
         headers: {
@@ -49,6 +51,8 @@ const Cart = () => {
   const decreaseQuantity = async (productId, currentQuantity) => {
     try {
       const updatedQuantity = currentQuantity - 1;
+      if (updatedQuantity < 1) return; // Prevent quantity from going below 1
+
       const q = { quantity: updatedQuantity };
       await axios.put(`${BASE_URL}/cart/${userId}/update/${productId}`, q, {
         headers: {
@@ -78,11 +82,11 @@ const Cart = () => {
         },
       });
       console.log("Order created:", response.data);
-  
+
       // Clear the cart items after successful purchase
       setItems([]); // Empty the items array immediately
       setSuccessMessage("You have purchased successfully!");
-  
+
       // Clear the success message after 3 seconds
       setTimeout(() => {
         setSuccessMessage("");
@@ -90,106 +94,141 @@ const Cart = () => {
     } catch (error) {
       console.error("Error creating order:", error);
     }
-    
   };
-  
 
   useEffect(() => {
     fetchItems();
-  }, [userId,handleBuy]); // fetch items on initial mount only
+  }, [userId]);
 
-  const totalItems = items && items.reduce((total, item) => total + item.quantity, 0);
-  const totalPrice = items && items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
+  const totalItems =
+    items && items.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice =
+    items &&
+    items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
 
   return (
     <div className="cart-container">
-      <h2 style={{ textAlign: "center" }}>Cart Items</h2>
-      {items == null || (items && items.length === 0) ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <div>
-          <p>Total items: {totalItems}</p>
-          <table className="cart-table">
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items && items.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <img
-                      style={{ height: "80px", width: "100px" }}
-                      src={item.productFile}
-                      alt={item.productName}
-                      className="cart-item-image"
-                    />
-                  </td>
-                  <td>{item.productName}</td>
-                  <td>
-                    <div className="quantity-controls">
-                      <button
-                        className="quantity-btn"
-                        onClick={() => decreaseQuantity(item.productId, item.quantity)}
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button
-                        className="quantity-btn"
-                        onClick={() => increaseQuantity(item.productStock, item.productId, item.quantity)}
-                        disabled={item.quantity >= item.productStock}
-                      >
-                        +
-                      </button>
-                      {stockWarning[item.productId] && (
-                        <span className="stock-warning">{stockWarning[item.productId]}</span>
-                      )}
-                    </div>
-                  </td>
-                  <td>Rs.{item.productPrice}</td>
-                  <td>
+      <h2 style={{ textAlign: "center", marginBottom: "10px" }}>My Cart</h2>
+      {items.length === 0 && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Your cart is empty
+        </motion.p>
+      )}
+      {items.length > 0 && (
+        <div className="cart-content">
+          <div className="cart-items-section">
+            <AnimatePresence>
+              {items.map((item, index) => (
+                <motion.div
+                  className="cart-item"
+                  key={item.productId}
+                  initial={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 2 }}
+                >
+                  <img
+                    src={item.productFile}
+                    alt={item.productName}
+                    className="cart-item-image"
+                  />
+                  <div className="cart-item-details">
+                    <h4>{item.productName}</h4>
+                    <p>{item.productDescription}</p>
+                    {item.productStock > 0 ? (
+                      <p className="in-stock">In Stock</p>
+                    ) : (
+                      <p className="out-of-stock">Out of Stock</p>
+                    )}
+                  </div>
+                  <div className="quantity-controls">
                     <button
-                      className="delete-btn"
+                      onClick={() =>
+                        decreaseQuantity(item.productId, item.quantity)
+                      }
+                      disabled={item.quantity <= 1}
+                      style={{
+                        cursor: item.quantity <= 1 ? "not-allowed" : "pointer",
+                      }}
+                    >
+                      -
+                    </button>
+                    <span>{item.quantity}</span>
+
+                    <button
+                      onClick={() =>
+                        increaseQuantity(
+                          item.productStock,
+                          item.productId,
+                          item.quantity
+                        )
+                      }
+                      disabled={item.quantity >= item.productStock}
+                      style={{
+                        cursor:
+                          item.quantity >= item.productStock
+                            ? "not-allowed"
+                            : "pointer",
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div className="cart-actions">
+                    <button
+                      className="remove-btn"
                       onClick={() => removeFromCart(item.productId)}
                     >
-                      Remove from Cart
+                      Remove
                     </button>
-                  </td>
-                </tr>
+                  </div>
+                </motion.div>
               ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {items && items.length > 0 && (
-        <div className="buy">
-          <motion.button
-            onClick={handleBuy}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            Buy now
-          </motion.button>
-          <span className="total-price">Total: Rs.{totalPrice.toFixed(2)}</span>
-        </div>
-      )}
+            </AnimatePresence>
+          </div>
 
-<AnimatePresence>
+          <div className="price-details-section">
+            <h3>PRICE DETAILS</h3>
+            <div className="price-detail">
+              <span>Price ({totalItems} items)</span>
+              <span>₹{totalPrice.toFixed(2)}</span>
+            </div>
+            <div className="price-detail">
+              <span>Coupons for you</span>
+              <span>– ₹50.00</span>
+            </div>
+            <div className="price-detail">
+              <span>Delivery Charges</span>
+              <span className="free">Free</span>
+            </div>
+            <hr />
+            <div className="total-amount">
+              <span>Total Amount</span>
+              <span>₹{(totalPrice - 50).toFixed(2)}</span>
+            </div>
+            <p className="savings">You will save ₹50.00 on this order</p>
+            <motion.button
+              onClick={handleBuy}
+              className="buy-btn"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Place Order
+            </motion.button>
+          </div>
+        </div>
+      )}
+      <AnimatePresence>
         {successMessage && (
           <motion.div
             className="success-message"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.5, type: "spring", stiffness: 150 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
             {successMessage}
           </motion.div>

@@ -111,15 +111,20 @@ const Product_Card = ({
           {Array(Math.floor(rating))
             .fill()
             .map((_, i) => (
-              <span key={i}>⭐</span>
+              <span key={i} className="filled">
+                ⭐
+              </span>
             ))}
-          {rating % 1 !== 0 && <span>⭐️</span>}
+          {rating % 1 !== 0 && <span className="filled">⭐️</span>}
           {Array(5 - Math.ceil(rating))
             .fill()
             .map((_, i) => (
-              <span key={i + Math.floor(rating) + 1}>☆</span>
+              <span key={i + Math.floor(rating) + 1} className="empty">
+                ☆
+              </span>
             ))}
         </div>
+
         <p className="category">{category}</p>
         <p className="description">{description}</p>
         <p className="price">${price}</p>
@@ -137,7 +142,7 @@ const Product_Card = ({
             <button
               className="add-to-cartt"
               onClick={handleAddToCart}
-              disabled={stock === 0} // Disable if stock is 0
+              disabled={stock === 0}
             >
               Add to Cart
             </button>

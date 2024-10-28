@@ -7,12 +7,9 @@ import ProductList from "./ProductList";
   const MerchantNavbar = ({setView}) => {
     return (
      <>
-      {/* <Navbar/> */}
+      
       <Navbar setView={setView} /> 
-      {/* <Routes>
-        {/* <Route  element={<ProductList/>} path="/products" /> */}
-      {/* <Route element={<MerchantOrders/>} path='/getallorders' /> */}
-      {/* </Routes> */} 
+     
 
      </>
     );

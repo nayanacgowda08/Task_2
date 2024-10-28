@@ -30,7 +30,7 @@ const MerchantPage = () => {
         return (
           <EditProductForm
             setView={setView}
-            // product={{ id: editProductId, name: "Sample Product", price: 1000, stock: 5, image: "" }}
+           
             product={editProductId}
           />
         );

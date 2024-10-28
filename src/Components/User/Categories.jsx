@@ -1,8 +1,7 @@
-// Categories.js
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../../assets/styles/category.css";
-import { BASE_URL } from '../../Services/helper';
+import { BASE_URL } from "../../Services/helper";
 
 const Categories = ({ onSelectCategory }) => {
   const [categories, setCategories] = useState([]);
@@ -10,7 +9,7 @@ const Categories = ({ onSelectCategory }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/categories/all`); 
+        const response = await axios.get(`${BASE_URL}/categories/all`);
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -22,7 +21,7 @@ const Categories = ({ onSelectCategory }) => {
 
   return (
     <div className="categories-container">
-      <div className="category-card" onClick={() => onSelectCategory(null)}> {/* Button for All Categories */}
+      <div className="category-card" onClick={() => onSelectCategory(null)}>
         <div className="category-name">All Categories</div>
       </div>
       {categories.map((category) => (

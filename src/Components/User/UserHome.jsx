@@ -1,4 +1,4 @@
-// UserHome.js
+
 import React, { useEffect, useState } from 'react';
 import Banner from '../Banner';
 import Products_Display from '../Products_Display';

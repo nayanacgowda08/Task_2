@@ -1,82 +1,124 @@
 .product-card {
     display: flex;
-    flex-direction: row; /* Change from column to row for horizontal orientation */
-    height: 180px; /* Adjusted height for larger display */
-    width: 400px; /* Adjusted width for larger display */
+    flex-direction: row; /* Horizontal orientation */
+    height: 240px; /* Increased height for a more substantial display */
+    width: 100%; /* Full width for flexibility */
+    max-width: 400px; /* Maximum width for the card */
     background-color: white;
     border-radius: 1rem;
     overflow: hidden;
-    transition: transform 0.3s;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for shadow */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     cursor: pointer;
+    margin: 10px; /* Space between cards */
+    position: relative; /* For positioning badges */
 }
 
 .card-image {
-    height: 100%; /* Ensure image takes full height */
-    width: 40%; /* Take 40% of the width for a balanced look */
+    height: 100%; /* Full height */
+    width: 50%; /* 40% width for image */
     background-size: cover;
     background-position: center;
-    transition: transform 0.3s;
+    border-radius: 1rem 0 0 1rem; /* Rounded corners on the left */
+    transition: transform 0.3s; /* Smooth transition */
+}
+
+.card-image:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
 .card-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
-    width: 60%; /* 60% width to accommodate the text and buttons */
+    padding: 15px; /* Increased padding for comfort */
+    width: 60%; /* 60% width for text and buttons */
 }
 
 .card-content h4 {
-    font-size: 18px; /* Larger font size */
-    margin-bottom: 4px;
+    font-size: 20px; /* Larger font size for title */
+    margin: 0 0 8px; /* Adjusted margin */
+    color: #333; /* Darker font for better contrast */
+    font-family: 'Roboto', sans-serif; /* Modern font */
 }
 
 .price {
-    font-size: 16px; /* Increase price font size */
+    font-size: 18px; /* Increased price font size */
     font-weight: bold;
-    margin: 4px 0;
+    color: #e63946; /* Distinct color for the price */
+    margin: 4px 0; /* Adjusted margin */
 }
 
 .btn-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 10px 0; /* Increased padding */
+    /* background-color: #0056b3; */
+    /* width: 100%; */
 }
 
-.btn-flex .add-to-cartt, 
-.btn-flex .view-detailss {
-    width: 45%; /* Keep buttons in the same position with wider cards */
-    font-size: 12px; /* Adjust button font size */
+.btn-flex .add-to-cart,
+.btn-flex .view-details {
+    width: 50%; /* Adjusted button width */
+    padding: 10px; /* Increased padding for touch targets */
+    font-size: 14px; /* Larger button font size */
+    border: none; /* No border for a cleaner look */
+    border-radius: 5px; /* Rounded button corners */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    
+}
+
+.add-to-cart {
+    background: linear-gradient(to right, #28a745, #218838); /* Green gradient */
+    color: white; /* White text */
+}
+
+.view-details {
+    background: linear-gradient(to right, #007bff, #0056b3); /* Blue gradient */
+    color: white; /* White text */
+}
+
+.add-to-cart:hover {
+    background: linear-gradient(to right, #218838, #28a745); /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.view-details:hover {
+    background: linear-gradient(to right, #0056b3, #007bff); /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
 }
 
 .product-card:hover {
     transform: scale(1.03); /* Slight scale on hover */
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+     /* Darker shadow on hover */
 }
 
-.add-to-cartt:hover, .view-detailss:hover {
-    transform: scale(1.05); /* Slight button scaling on hover */
-    opacity: 0.9; /* Add a bit of opacity on hover */
+.product-card .category {
+    padding: 5px 2px; /* Padding for category badge */
+    border-radius: 12px; /* Rounded corners for badge */
+    font-weight: bold; /* Bold category text */
+    margin-top: 10px; /* Margin for spacing */
 }
 
-.product-card {
-    border: 2px solid transparent; /* Default border */
-    border-left: 6px solid #28a745; /* Green border for emphasis */
+.product-card .category.groceries {
+    background-color: #ffc107; /* Yellow for Groceries */
+    color: #fff; /* White text */
 }
 
-/* Conditional border color based on category (you can assign dynamically in JSX) */
-.category.groceries {
-    border-left-color: #ffc107; /* Yellow for Groceries */
+.product-card .category.electronics {
+    background-color: #007bff; /* Blue for Electronics */
+    color: #fff; /* White text */
 }
 
-.category.electronics {
-    border-left-color: #007bff; /* Blue for Electronics */
+.product-card .category.clothing {
+    background-color: #ff5733; /* Orange for Clothing */
+    color: #fff; /* White text */
 }
 
 .card-image {
-    position: relative;
+    position: relative; /* For overlay */
+    border-radius: 1rem 0 0 1rem; /* Ensure rounded corners */
 }
 
 .card-image::before {
@@ -86,25 +128,83 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
-    transition: opacity 0.3s;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)); /* Darker overlay */
+    transition: opacity 0.3s; /* Smooth opacity transition */
+    border-radius: 1rem 0 0 1rem; /* Match card's border radius */
 }
 
 .card-image:hover::before {
-    opacity: 0.7;
-}
-
-h4 {
-    font-family: 'Roboto', sans-serif; /* Clean, modern font */
-    color: #333; /* Darker font for better contrast */
-}
-
-.price {
-    color: #e63946; /* Distinct color for the price */
+    opacity: 0.5; /* Slightly transparent on hover */
 }
 
 .description {
     color: #555; /* Slightly muted description text */
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 14px; /* Adjusted font size */
+    line-height: 1.4; /* Increased line height for readability */
+}
+
+.add-to-cartt,
+.view-detailss {
+    padding: 8px 8px; /* Reduced padding */
+    font-size: 13px; /* Font size */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+
+}
+
+.add-to-cartt {
+    background-color: #ff9f00; /* Green background */
+    color: white; /* White text */
+    /* margin-right: 2px; */
+}
+
+.view-detailss {
+    background-color: #fb641b; /* Blue background */
+    color: white; /* White text */
+    margin-left: 2px;
+}
+
+.add-to-cartt:hover {
+    
+    transform: scale(1.02); /* Slight scale on hover */
+}
+
+.view-detailss:hover {
+   
+    transform: scale(1.02); /* Slight scale on hover */
+}
+
+.go-to-cart {
+    background-color: #ffc107; /* Yellow background for 'Go to Cart' */
+    color: white; /* White text */
+    padding: 8px 8px; /* Reduced padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    margin-top: 10px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.go-to-cart:hover {
+    background-color: #ffc200; /* Darker yellow on hover */
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-card {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        height: auto; /* Auto height for flexibility */
+        width: 100%; /* Full width */
+    }
+
+    .card-image {
+        width: 100%; /* Full width for image */
+        height: 200px; /* Fixed height for consistency */
+    }
+
+    .card-content {
+        width: 100%; /* Full width for content */
+    }
 }

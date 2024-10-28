@@ -1,32 +1,49 @@
-/* src/styles/Categories.css */
+
 .categories-container {
   display: flex;
-  justify-content: flex-start; /* Aligns items to the start */
-  flex-wrap: wrap; /* Allows wrapping for smaller screens */
-  gap: 10px; /* Reduced gap between items */
-  padding: 20px;
-  background-color: white;
+  justify-content: center; 
+  flex-wrap: wrap;
+  gap: 20px; 
+  padding: 20px 10px;
+  background-color: rgb(244, 248, 250); 
+  border-radius: 10px;
+  margin: 0px 20px;
 }
 
+/* Adjusted styles for category cards */
 .category-card {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100px; /* Adjusted width for smaller size */
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #f9f9f9; /* Light background for better visibility */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Lighter shadow */
-  transition: transform 0.2s ease; /* Faster transition */
+  width: 100px; /* Maintain a fixed width for cards */
+  padding: 15px; /* Increased padding for a spacious look */
+  border-radius: 8px; /* Slightly reduced border radius */
+  background-color: #ffffff; /* White background for cards */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Softer shadow for a cleaner look */
+  transition: transform 0.2s ease; /* Transition for hover effects */
 }
 
 .category-card:hover {
-  transform: scale(1.02); /* Slightly smaller scale for hover effect */
+  transform: translateY(-3px); /* Slight lift on hover */
 }
 
 .category-name {
-  font-size: 14px; /* Maintained font size */
+  font-size: 16px; /* Slightly larger font size */
   font-weight: bold;
-  color: #4a4a4a; /* Dark color for better contrast */
+  color: #333; /* Darker color for better contrast */
+  margin-top: 10px; /* Space between icon and text */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .category-card {
+    width: 90px; /* Smaller width for mobile */
+    padding: 10px; /* Adjusted padding */
+  }
+  
+  .category-name {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
 }

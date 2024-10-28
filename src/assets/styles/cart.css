@@ -1,102 +1,168 @@
+/* src/assets/styles/cart.css */
+
 .cart-container {
-  padding: 30px;
-  /* background-color: red; */
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
 
-.cart-table {
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
+.cart-content {
+  display: flex;
+  justify-content: space-between;
 }
 
-.cart-table th,
-.cart-table td {
-  /* background-color: red; */
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid #ccc;
+.cart-items-section {
+  flex: 3;
+  padding-right: 20px;
 }
 
-.cart-table th {
-  background-color: #2c3e50;
-  color: white;
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: white;
 }
 
 .cart-item-image {
-  width: 20px;
-  height: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
   object-fit: cover;
 }
 
-.delete-btn {
-  padding: 5px 10px;
-  background-color: red;
+.cart-item-details {
+  margin-left: 15px;
+  flex: 1;
+}
+
+.cart-item-details h4 {
+  font-size: 16px;
+
+}
+
+.cart-item-details p {
+  margin: 5px 0;
+}
+
+.in-stock {
+  color: #28a745;
+}
+
+.out-of-stock {
+  color: #e74c3c;
+}
+
+.cart-actions {
+  margin-left: auto;
+}
+
+.remove-btn {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #d43f3f;
+}
+
+.price-details-section {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.price-details-section h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.price-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.free {
+  color: #28a745;
+}
+
+.total-amount {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.savings {
+  color: #28a745;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.buy-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #09b9ee;
   color: white;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.delete-btn:hover {
-  background-color: #e74c3c;
+.buy-btn:hover {
+  background-color: #19a2e6;
 }
-
-.quantity-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* background-color: #2980b9; */
-  gap: 10px;
-}
-
-.quantity-btn {
-  padding: 5px 10px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.quantity-btn:hover {
-  background-color: #2980b9;
-}
-
-.delete-btn {
-  padding: 5px 10px;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.delete-btn:hover {
-  background-color: #c0392b;
-}
-
-.buy{
-  margin-top: 20px;
-  text-align: right;
-}
-
 
 .success-message {
-  background-color: #d4edda; /* Light green background */
-  color: #155724; /* Dark green text */
-  border: 1px solid #c3e6cb; /* Border color */
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
   padding: 10px;
   margin: 15px 0;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   text-align: center;
   font-weight: bold;
 }
 
-.stock-warning {
-  color: red;
-  font-size: 12px;
-  margin-left: 10px;
+/* src/assets/styles/cart.css */
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
 }
 
+.quantity-controls button {
+  background-color: #ddd;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quantity-controls span {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.quantity-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6; /* Optional: makes the button look slightly faded */
+}

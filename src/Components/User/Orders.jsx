@@ -69,7 +69,7 @@ const Orders = () => {
                         {order.status}
                       </div>
 
-                      {/* Improved Rating Section */}
+                     
                       {order.status === 'DELIVERED' && (
                         <div className="rating-section">
                           <p>Rate this product:</p>

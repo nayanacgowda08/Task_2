@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../assets/styles/productdetail.css";
 import { BASE_URL } from "../Services/helper";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; // Import star icons
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -104,8 +104,6 @@ const ProductDetails = () => {
           <h2>{selectedProduct.name}</h2>
           <p>{selectedProduct.description}</p>
           <p className="price">Price: ${selectedProduct.price}</p>
-
-          {/* Updated Rating Section */}
           <div className="rating-container">
             <div className="star-rating">
               {renderStars(selectedProduct.productRating)}
@@ -119,8 +117,6 @@ const ProductDetails = () => {
           </div>
 
           <p className="merchant">Merchant: {selectedProduct.merchantName}</p>
-
-          {/* Display "Out of Stock" if stock is 0 or below */}
           {selectedProduct.stock <= 0 ? (
             <button className="out-of-stock-button" disabled>
               Out of Stock

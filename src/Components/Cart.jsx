@@ -109,7 +109,7 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h2 style={{ textAlign: "center", marginBottom: "10px" }}>My Cart</h2>
-      {items.length === 0 && (
+      {items && items.length === 0 && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -119,7 +119,7 @@ const Cart = () => {
           Your cart is empty
         </motion.p>
       )}
-      {items.length > 0 && (
+      {items && items.length > 0 && (
         <div className="cart-content">
           <div className="cart-items-section">
             <AnimatePresence>

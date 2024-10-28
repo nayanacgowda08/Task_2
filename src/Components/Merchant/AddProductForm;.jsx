@@ -145,7 +145,7 @@ const AddProductForm = ({ setView }) => {
         </div>
 
         <div className="form-group">
-          <label>USP: </label>
+          <label>Attribute: </label>
           <input
             type="text"
             value={usp}

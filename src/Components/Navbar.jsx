@@ -61,7 +61,7 @@ const Navbar = ({ setView }) => {
                 <span>Orders</span>
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/merchant/analytics">
                 <motion.i
                   className="ri-bar-chart-grouped-line"
@@ -80,7 +80,7 @@ const Navbar = ({ setView }) => {
                 ></motion.i>
                 <span>Profile</span>
               </NavLink>
-            </li>
+            </li> */}
           </>
         ) : (
           <>
@@ -104,7 +104,7 @@ const Navbar = ({ setView }) => {
                 <span>Orders</span>
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/user/profile">
                 <motion.i
                   className="ri-account-circle-line"
@@ -113,7 +113,7 @@ const Navbar = ({ setView }) => {
                 ></motion.i>
                 <span>Profile</span>
               </NavLink>
-            </li>
+            </li> */}
           </>
         )}
         <li>

@@ -126,7 +126,7 @@ const Product_Card = ({
         </div>
 
         <p className="category">{category}</p>
-        <p className="description">{description}</p>
+        <p className="description">{usp}</p>
         <p className="price">${price}</p>
         {stock > 0 ? (
           <span className="in-stock">In Stock</span>

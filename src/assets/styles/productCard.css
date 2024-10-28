@@ -69,20 +69,20 @@
     
 }
 
-.add-to-cart {
-    background: linear-gradient(to right, #28a745, #218838); /* Green gradient */
-    color: white; /* White text */
-}
+/* .add-to-cart {
+    background: linear-gradient(to right, #089ebb, #138ab6); /* Green gradient */
+    /* color: white; /* White text */
+/* } */ */ */
 
 .view-details {
     background: linear-gradient(to right, #007bff, #0056b3); /* Blue gradient */
     color: white; /* White text */
 }
 
-.add-to-cart:hover {
+/* .add-to-cart:hover {
     background: linear-gradient(to right, #218838, #28a745); /* Darker green on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
-}
+    /* transform: translateY(-2px); Lift effect on hover */
+/* } */ */
 
 .view-details:hover {
     background: linear-gradient(to right, #0056b3, #007bff); /* Darker blue on hover */

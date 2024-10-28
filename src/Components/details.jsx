@@ -99,7 +99,11 @@ const Details = () => {
       <div className="details-card">
         
         <div className="details-image-container">
-          <img src={image} alt={title} className="details-image" />
+          <img src={image} alt={title} className="details-image" 
+          style={{
+            // width:"500px", height:"300px" , objectFit:"cover"
+          }}
+          />
         </div>
 
         
@@ -135,7 +139,7 @@ const Details = () => {
       onClick={handleAddToCart}
       disabled={stock === 0} 
     >
-      Add to Cart
+      {stock === 0 ? "Out of Stock" : "Add to Cart"}
     </button>
   )}
 </div>

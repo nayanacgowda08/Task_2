@@ -106,6 +106,9 @@ const Cart = () => {
     items &&
     items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
 
+    console.log(items);
+    
+
   return (
     <div className="cart-container">
       <h2 style={{ textAlign: "center", marginBottom: "10px" }}>My Cart</h2>
@@ -138,7 +141,12 @@ const Cart = () => {
                   />
                   <div className="cart-item-details">
                     <h4>{item.productName}</h4>
-                    <p>{item.productDescription}</p>
+                    <p style={{
+                      color:"gray" ,
+                      fontSize:"14px"
+                    }}
+                    >Rs.{item.productPrice
+                    }</p>
                     {item.productStock > 0 ? (
                       <p className="in-stock">In Stock</p>
                     ) : (

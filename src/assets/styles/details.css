@@ -7,6 +7,7 @@
   min-height: 100vh; /* Full viewport height */
   background-color: #f7f9fc; /* Softer background color */
   padding: 20px; /* Padding for spacing */
+  
 }
 
 .details-card {
@@ -22,17 +23,19 @@
 }
 
 .details-image-container {
-  flex: 1; /* Image takes up one portion of the card */
-  overflow: hidden; /* Hide overflow */
+  flex: 1;
+  width: 300px; /* Set a fixed width */
+  height: 400px; /* Set a fixed height */
+  overflow: hidden;
 }
 
 .details-image {
   width: 100%;
-  height: 100%; /* Full height of the container */
-  object-fit: cover; /* Cover to fill the container */
-  transition: transform 0.3s; /* Smooth hover effect */
+  height: 100%;
+  /* object-fit: cover; */
+  background-position: center;
+  transition: transform 0.3s;
 }
-
 .details-image:hover {
   transform: scale(1.05); /* Zoom effect on hover */
 }
@@ -112,16 +115,8 @@
   transition: background-color 0.3s, transform 0.2s; /* Transition effect */
 }
 
-.add-to-cart {
-  background-color: #007bff; /* Primary button color */
-  color: white; /* White text */
-  border-radius: 5px; /* Rounded corners */
-}
 
-.add-to-cart:hover {
-  background-color: #0056b3; /* Darker blue on hover */
-  transform: translateY(-2px); /* Slight lift on hover */
-}
+ 
 
 .out-of-stock-btn {
   background-color: #ccc; /* Grey background */
@@ -194,7 +189,7 @@
 /* Existing styles remain unchanged */
 
 /* Style for the Add to Cart button */
-.add-to-cart {
+.cart-section .add-to-cart {
   padding: 12px 20px; /* Button padding */
   font-size: 1.1rem; /* Button font size */
   border: none; /* No border */
@@ -203,19 +198,24 @@
   max-width: 300px; /* Limit button width */
   margin-top: 15px; /* Margin on top */
   transition: background-color 0.3s; /* Transition effect */
-  background-color: #28a745; /* Green background by default */
+  background-color: #1f8fbc; /* Sky blue background by default */
   color: white; /* White text */
   border-radius: 5px; /* Rounded corners */
 }
 
-/* Add a different background color when adding to cart */
 .add-to-cart:hover {
-  background-color: #218838; /* Darker green on hover */
+  background-color: #00bfff;
+  transform: translateY(-2px);  /* Slightly darker sky blue on hover */
 }
 
 /* Change background color when item is already in the cart */
 .in-cart {
-  background-color: #007bff; 
+  background-color: #0074cc; /* Darker blue background */
+  color: white; /* White text */
+}
+
+.in-cart:hover {
+  background-color: #005fa3; /* Even darker blue on hover */
 }
 
 
@@ -223,4 +223,11 @@
   background-color: #ccc; /* Grey background */
   color: #888; /* Grey text */
   border-radius: 5px; /* Rounded corners */
+}
+
+.add-to-cart:disabled {
+  background-color: #ccc; /* Grey background for disabled state */
+  color: #888; /* Grey text for disabled state */
+  cursor: not-allowed; /* Show "not-allowed" cursor on hover */
+  opacity: 0.7; /* Slight transparency for disabled look */
 }

@@ -131,50 +131,71 @@ const Cart = () => {
         )}
       </AnimatePresence>
       {items && items.length > 0 && (
-        <div className="cart-content">
-          {/* Cart items section */}
-          <div className="cart-items-section">
-            <AnimatePresence>
-              {items.map((item) => (
-                <motion.div
-                  className="cart-item"
-                  key={item.productId}
-                  initial={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 2 }}
-                >
-                  <img
-                    src={item.productFile}
-                    alt={item.productName}
-                    className="cart-item-image"
-                  />
-                  <div className="cart-item-details">
-                    <h4>{item.productName}</h4>
-                    <p style={{ color: "gray", fontSize: "14px" }}>₹{item.productPrice}</p>
-                    {item.productStock > 0 ? (
-                      <p className="in-stock">In Stock</p>
-                    ) : (
-                      <p className="out-of-stock">Out of Stock</p>
-                    )}
-                  </div>
-                  <div className="quantity-controls">
-                    <button onClick={() => decreaseQuantity(item.productId, item.quantity)} disabled={item.quantity <= 1}>
-                      -
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() => increaseQuantity(item.productStock, item.productId, item.quantity)} disabled={item.quantity >= item.productStock}>
-                      +
-                    </button>
-                  </div>
-                  <div className="cart-actions">
-                    <button className="remove-btn" onClick={() => removeFromCart(item.productId)}>
-                      Remove
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
+       <div className="cart-content">
+       {/* Cart items section */}
+       <div className="cart-items-section">
+         <AnimatePresence>
+           {items.map((item) => {
+             const originalPrice = item.productPrice > 15000 ? item.productPrice + 15000 : item.productPrice;
+             const discountedPrice = item.productPrice;
+             const discount = originalPrice > 0 ? ((originalPrice - discountedPrice) / originalPrice) * 100 : 0; // Calculate discount percentage
+     
+             return (
+               <motion.div
+                 className="cart-item"
+                 key={item.productId}
+                 initial={{ opacity: 1, x: 0 }}
+                 exit={{ opacity: 0, x: -100 }}
+                 transition={{ duration: 0.3 }} // Adjusted duration for smoother animation
+               >
+                 <img
+                   src={item.productFile}
+                   alt={item.productName}
+                   className="cart-item-image"
+                 />
+                 <div className="cart-item-details">
+                   <h4>{item.productName}</h4>
+                   <div style={{ display: "flex", alignItems: "center" }}>
+                     {originalPrice > 15000 && (
+                       <p style={{ color: "gray", fontSize: "14px", textDecoration: "line-through", marginRight: "10px" }}>
+                         ₹{originalPrice}
+                       </p>
+                     )}
+                     <p style={{ color: "black", fontSize: "16px", fontWeight: "bold" }}>
+                       ₹{discountedPrice}
+                     </p>
+                   </div>
+                   {item.productStock > 0 ? (
+                     <p className="in-stock">In Stock</p>
+                   ) : (
+                     <p className="out-of-stock">Out of Stock</p>
+                   )}
+                   {discount > 0 && originalPrice > 15000 && (
+                     <p style={{ color: "green", fontSize: "14px", marginTop: "5px" }}>
+                       Offer: {Math.round(discount)}% Off
+                     </p>
+                   )}
+                 </div>
+                 <div className="quantity-controls">
+                   <button onClick={() => decreaseQuantity(item.productId, item.quantity)} disabled={item.quantity <= 1}>
+                     -
+                   </button>
+                   <span>{item.quantity}</span>
+                   <button onClick={() => increaseQuantity(item.productStock, item.productId, item.quantity)} disabled={item.quantity >= item.productStock}>
+                     +
+                   </button>
+                 </div>
+                 <div className="cart-actions">
+                   <button className="remove-btn" onClick={() => removeFromCart(item.productId)}>
+                     Remove
+                   </button>
+                 </div>
+               </motion.div>
+             );
+           })}
+         </AnimatePresence>
+       </div>
+     
 
           {/* Price details section */}
           <div className="price-details-section">

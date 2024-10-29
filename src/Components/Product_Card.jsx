@@ -89,6 +89,9 @@ const Product_Card = ({
     }
   };
 
+  const originalPrice = price > 15000 ? price + 15000 : price; // Original price logic
+  const discount = originalPrice > 0 ? ((originalPrice - price) / originalPrice) * 100 : 0; // Calculate discount percentage
+
   return (
     <>
       <div className="product-card">
@@ -114,9 +117,29 @@ const Product_Card = ({
           </div>
           <p className="category">{category}</p>
           <p className="description">{usp}</p>
-          <p className="price">${price}</p>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {originalPrice > 15000 && (
+              <p style={{ color: "gray", fontSize: "14px", textDecoration: "line-through", marginRight: "10px" }}>
+                ₹{originalPrice}
+              </p>
+            )}
+            <p style={{ color: "black", fontSize: "16px", fontWeight: "bold" }}>
+              ₹{price}
+            </p>
+          </div>
+          {discount > 0 && originalPrice > 15000 && (
+            <p style={{ color: "green", fontSize: "14px", marginTop: "5px" }}>
+              Offer: {Math.round(discount)}% Off
+            </p>
+          )}
           {stock > 0 ? (
-            <span className="in-stock">In Stock</span>
+            stock < 10 ? (
+              <span className="hurry-up" style={{ color: "orange" }}>
+                Hurry Up! Only {stock} left
+              </span>
+            ) : (
+              <span className="in-stock">In Stock</span>
+            )
           ) : (
             <span className="out-of-stock">Out of Stock</span>
           )}
@@ -162,7 +185,17 @@ const Product_Card = ({
                 <p><strong>Category:</strong> {category}</p>
                 <p>{description}</p>
                 <p>{usp}</p>
-                <h3>Price: <span style={{ color: "#28a745" }}>${price}</span></h3>
+                <h3>Price: <span style={{ color: "#28a745" }}>₹{price}</span></h3>
+                {originalPrice > 15000 && (
+                  <p style={{ textDecoration: "line-through", color: "gray", margin: "5px 0" }}>
+                    Original Price: ₹{originalPrice}
+                  </p>
+                )}
+                {discount > 0 && originalPrice > 15000 && (
+                  <p style={{ color: "green", fontSize: "14px", marginTop: "5px" }}>
+                    Offer: {Math.round(discount)}% Off
+                  </p>
+                )}
                 <p>Stock: {stock > 0 ? "In Stock" : "Out of Stock"}</p>
                 <div className="modal-buttons">
                   <button className="add-to-cart-modal" onClick={handleAddToCart} disabled={stock === 0}>
@@ -226,33 +259,6 @@ const CloseButton = styled.button`
   border: none;
   cursor: pointer;
   color: #333;
-`;
-
-const AddToCartButton = styled.button`
-  background-color: #107bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-`;
-
-const CloseModalButton = styled(AddToCartButton)`
-  background-color: #dc3545;
-
-  &:hover {
-    background-color: #c73333;
-  }
 `;
 
 export default Product_Card;

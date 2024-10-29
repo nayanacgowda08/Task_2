@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../assets/styles/productdetail.css";
 import { BASE_URL } from "../Services/helper";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
@@ -77,74 +76,116 @@ const ProductDetails = () => {
     navigate("/user/cart");
   };
 
-
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= Math.floor(rating)) {
-        stars.push(<FaStar key={i} className="star" />);
+        stars.push(<FaStar key={i} style={{ color: "gold" }} className="star" />);
       } else if (i - rating < 1) {
-        stars.push(<FaStarHalfAlt key={i} className="star" />);
+        stars.push(<FaStarHalfAlt key={i} style={{ color: "gold" }} className="star" />);
       } else {
-        stars.push(<FaRegStar key={i} className="empty-star" />);
+        stars.push(<FaRegStar key={i} style={{ color: "gold" }} className="empty-star" />);
       }
     }
     return stars;
   };
 
-  return (
-    <div className="product-details-container">
-      <div className="selected-product">
-        <img
-          src={selectedProduct.file}
-          alt={selectedProduct.name}
-          className="selected-product-image"
-        />
-        <div className="selected-product-info">
-          <h2>{selectedProduct.name}</h2>
-          <p>{selectedProduct.description}</p>
-          <p className="price">Price: ${selectedProduct.price}</p>
-          <div className="rating-container">
-            <div className="star-rating">
-              {renderStars(selectedProduct.productRating)}
-            </div>
-            <span className="rating-text">
-              {selectedProduct.productRating} / 5
-            </span>
-            <span className="review-count">
-              ({selectedProduct.ratingCount} reviews)
-            </span>
-          </div>
+  const containerStyle = {
+    maxWidth: "800px",
+    margin: "auto",
+    padding: "20px",
+    backgroundColor: "#f9f9f9",
+    borderRadius: "8px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+  };
 
-          <p className="merchant">Merchant: {selectedProduct.merchantName}</p>
-          {selectedProduct.stock <= 0 ? (
-            <button className="out-of-stock-button" disabled>
-              Out of Stock
-            </button>
-          ) : (
-            <button
-              className="add-to-cart-button"
-              onClick={inCart ? handleGoToCart : handleAddToCart}
-            >
-              {inCart ? "Go to Cart" : "Add to Cart"}
-            </button>
-          )}
+  const selectedProductCardStyle = {
+    border: "1px solid #e0e0e0",
+    borderRadius: "8px",
+    padding: "20px",
+    background: "#ffffff",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: "40px"
+  };
+
+  const productImageStyle = {
+    width: "300px",
+    height: "300px",
+    borderRadius: "8px",
+    marginBottom: "20px"
+  };
+
+  const addToCartButtonStyle = {
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: inCart ? "#4CAF50" : "#007BFF",
+    color: "#fff",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+    marginTop: "10px"
+  };
+
+  const relatedProductsSectionStyle = {
+    marginTop: "20px"
+  };
+
+  const relatedProductCardStyle = {
+    border: "1px solid #e0e0e0",
+    borderRadius: "5px",
+    padding: "10px",
+    margin: "5px",
+    textAlign: "center",
+    cursor: "pointer",
+    transition: "transform 0.2s"
+  };
+
+  const relatedProductImageStyle = {
+    width: "80px",
+    height: "80px",
+    borderRadius: "4px",
+    marginBottom: "10px"
+  };
+
+  return (
+    <div style={containerStyle}>
+      {/* Selected Product Section */}
+      <div style={selectedProductCardStyle}>
+        <img src={selectedProduct.file} alt={selectedProduct.name} style={productImageStyle} />
+        <h2 className="product-name" style={{ fontSize: "24px", marginBottom: "10px" }}>{selectedProduct.name}</h2>
+        <p className="product-description" style={{ marginBottom: "10px" }}>{selectedProduct.description}</p>
+        <p className="product-price" style={{ fontWeight: "bold", marginBottom: "10px" }}>Price: ₹{selectedProduct.price}</p>
+        <div className="product-rating" style={{ marginBottom: "10px" }}>
+          {renderStars(selectedProduct.productRating)}
+          <span style={{ marginLeft: "5px" }}>({selectedProduct.ratingCount} reviews)</span>
         </div>
+        <p className="product-merchant" style={{ marginBottom: "20px" }}>Merchant: {selectedProduct.merchantName}</p>
+        <button
+          style={addToCartButtonStyle}
+          onClick={inCart ? handleGoToCart : handleAddToCart}
+        >
+          {inCart ? "Go to Cart" : "Add to Cart"}
+        </button>
       </div>
 
-      <div className="related-products">
+      {/* Related Products Section */}
+      <div style={relatedProductsSectionStyle}>
         <h3>More Products Like This</h3>
-        <div className="related-products-grid">
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
           {relatedProducts.map((relatedProduct) => (
             <div
               key={relatedProduct.id}
-              className="related-product-item"
+              style={relatedProductCardStyle}
               onClick={() => handleProductClick(relatedProduct)}
+              onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+              onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
               <img
                 src={relatedProduct.file}
                 alt={relatedProduct.name}
-                className="related-product-image"
+                style={relatedProductImageStyle}
               />
               <p className="related-product-name">{relatedProduct.name}</p>
             </div>

@@ -1,4 +1,4 @@
-/* Container and Heading */
+
 .merchant-container {
     padding: 20px;
     max-width: 1200px;
@@ -16,7 +16,7 @@
     font-weight: bold;
 }
 
-/* Order List and Cards */
+
 .order-list {
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@
     transform: scale(1.02);
 }
 
-/* Order Details and Product List */
+
 .order-details {
     display: flex;
     width: 100%;
@@ -55,20 +55,20 @@
 
 .order-info h3,
 .order-info p {
-    margin-bottom: 8px; /* Adds extra space between each line */
+    margin-bottom: 8px; 
 }
 
 .order-info h3 {
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    margin: 0; /* Remove default margin */
+    margin: 0; 
 }
 
 .order-info p {
     font-size: 14px;
     color: #555;
-    margin: 0; /* Remove default margin for better spacing control */
+    margin: 0; 
 }
 
 .product-list {
@@ -77,7 +77,7 @@
     gap: 15px;
 }
 
-/* Product Cards */
+
 .product-card {
     display: flex;
     align-items: center;
@@ -88,7 +88,7 @@
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    /* background-color: #218838; */
+    
 }
 
 .product-card:hover {
@@ -109,12 +109,12 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    /* background-color: rebeccapurple; */
+    
     justify-content: left;
     align-items: flex-start;
 }
 
-/* Text Styles */
+
 .delivered-status {
     color: #28a745;
     font-weight: bold;
@@ -138,7 +138,7 @@
 }
 
 .product-infoo p {
-    /* margin: 2px 0; */
+    
     color: #555;
     font-size: 14px;
 }
@@ -152,7 +152,7 @@
     text-overflow: ellipsis;
 }
 
-/* Buttons */
+
 .pending-buttonn,
 .delivered-buttonn {
     padding: 8px 12px; 

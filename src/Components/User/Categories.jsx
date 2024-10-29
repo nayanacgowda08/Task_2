@@ -5,6 +5,7 @@ import { BASE_URL } from "../../Services/helper";
 
 const Categories = ({ onSelectCategory }) => {
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null); // Track selected category
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -19,16 +20,24 @@ const Categories = ({ onSelectCategory }) => {
     fetchCategories();
   }, []);
 
+  const handleCategoryClick = (categoryId) => {
+    setSelectedCategory(categoryId); 
+    onSelectCategory(categoryId);    
+  };
+
   return (
     <div className="categories-container">
-      <div className="category-card" onClick={() => onSelectCategory(null)}>
+      <div
+        className={`category-card ${selectedCategory === null ? "selected" : ""}`}
+        onClick={() => handleCategoryClick(null)}
+      >
         <div className="category-name">All Categories</div>
       </div>
       {categories.map((category) => (
         <div
-          className="category-card"
+          className={`category-card ${selectedCategory === category.id ? "selected" : ""}`}
           key={category.id}
-          onClick={() => onSelectCategory(category.id)}
+          onClick={() => handleCategoryClick(category.id)}
         >
           <div className="category-name">{category.name}</div>
         </div>

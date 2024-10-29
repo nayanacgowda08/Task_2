@@ -7,7 +7,7 @@
   background-color: #f3f4f6;
 }
 
-/* Selected Product Section */
+
 .selected-product {
   display: flex;
   gap: 25px;
@@ -61,7 +61,7 @@
   color: #6b7280;
 }
 
-/* Button Styles */
+
 .add-to-cart-button, .out-of-stock-button {
   margin-top: 15px;
   padding: 12px 20px;
@@ -88,7 +88,7 @@
   cursor: not-allowed;
 }
 
-/* Related Products Section */
+
 .related-products {
   width: 100%;
   max-width: 950px;
@@ -142,7 +142,7 @@
   text-align: center;
 }
 
-/* Rating Section */
+
 .rating-container {
   display: flex;
   align-items: center;
@@ -159,11 +159,11 @@
 
 .star {
   font-size: 18px;
-  color: #fbbf24; /* Gold color for filled stars */
+  color: #fbbf24; 
 }
 
 .empty-star {
-  color: #d1d5db; /* Light gray for empty stars */
+  color: #d1d5db; 
 }
 
 .rating-text {

@@ -1,21 +1,21 @@
-/* ProductList.css */
+ 
 
 .product {
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Adjust min size to match card width */
-    gap: 30px; /* Adjust the gap between the cards */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));  
+    gap: 30px;  
     margin: 50px 30px;
-    justify-content: center; /* Ensure the grid is centered */
+    justify-content: center;  
 }
 
 @media (max-width: 768px) {
     .product-list {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust for smaller screens */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
     }
 }
 
 @media (max-width: 500px) {
     .product-list {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr;  
     }
 }

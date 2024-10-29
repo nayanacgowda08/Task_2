@@ -145,7 +145,7 @@ const Cart = () => {
                       color:"gray" ,
                       fontSize:"14px"
                     }}
-                    >Rs.{item.productPrice
+                    >₹{item.productPrice
                     }</p>
                     {item.productStock > 0 ? (
                       <p className="in-stock">In Stock</p>

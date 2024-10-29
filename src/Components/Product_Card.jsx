@@ -68,10 +68,7 @@ const Product_Card = ({
   };
 
   const handleAddToCart = async () => {
-    if (!userId) {
-      console.error("User not logged in");
-      return;
-    }
+    if (stock === 0 || !userId) return;
 
     const cartItemDTO = {
       productId: id,
@@ -127,7 +124,7 @@ const Product_Card = ({
 
         <p className="category">{category}</p>
         <p className="description">{usp}</p>
-        <p className="price">${price}</p>
+        <p className="price">₹{price}</p>
         {stock > 0 ? (
           <span className="in-stock">In Stock</span>
         ) : (
@@ -140,7 +137,7 @@ const Product_Card = ({
             </button>
           ) : (
             <button
-              className="add-to-cartt"
+              className={`add-to-cartt ${stock === 0 ? "no-hover" : ""}`}
               onClick={handleAddToCart}
               disabled={stock === 0}
             >

@@ -1,23 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
-/* body {
-
-  height: 100vh;
-} */
-
 .main-regis {
   display: flex;
   font-family: 'Poppins', sans-serif;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  /* margin-top: -20px; */
+  
   height: 100vh;
   background: url('https://media.istockphoto.com/id/1286825422/vector/futuristic-online-shopping-e-commerce-concept-with-glowing-smartphone-shopping-cart-credit.jpg?s=612x612&w=0&k=20&c=PSJSmwBuy8_fpXqkVcVmamNlDeFJhtSLzOx45O3HOso=') no-repeat center center/cover ;
   position: relative;
@@ -31,8 +20,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent dark overlay */
-  backdrop-filter: blur(5px); /* Blurring effect */
+  background-color: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(5px); 
   z-index: 0;
 }
 .welcome-banner {
@@ -40,33 +29,33 @@
   text-align: center;
   margin-bottom: 10px;
   z-index: 1;
-  animation: fadeInSlideUp 1.5s ease forwards; /* Apply fade and slide animation */
+  animation: fadeInSlideUp 1.5s ease forwards; 
 }
 
-/* Welcome Heading and Subheading */
+
 .welcome-banner h1 {
   font-size: 2.8rem;
   font-weight: 600;
   margin-bottom: 10px;
-  animation: glowingText 2s ease-in-out infinite; /* Text glow effect */
+  animation: glowingText 2s ease-in-out infinite; 
 }
 
 .welcome-banner p {
   font-size: 1.2rem;
   font-weight: 400;
   opacity: 0;
-  animation: fadeIn 2s ease 1s forwards; /* Fade-in for subtitle with delay */
+  animation: fadeIn 2s ease 1s forwards; 
 }
 
-/* Animations for Welcome Banner */
+
 @keyframes fadeInSlideUp {
   0% {
     opacity: 0;
-    transform: translateY(50px); /* Starts off below */
+    transform: translateY(50px); 
   }
   100% {
     opacity: 1;
-    transform: translateY(0); /* Moves into position */
+    transform: translateY(0); 
   }
 }
 
@@ -99,10 +88,10 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   font-family: 'Poppins', sans-serif;
-  z-index: 1; /* Ensure form is above background */
+  z-index: 1; 
 }
 
-/* Heading styling */
+
 .register-page h2 {
   text-align: center;
   margin-bottom: 20px;
@@ -121,13 +110,13 @@
 
 .register-page .input-field input {
   width: 100%;
-  padding: 12px 12px 12px 12px; /* Adjust padding for label */
-  border: 2px solid #ccc; /* Change border thickness */
-  border-radius: 5px; /* Slightly rounded corners */
+  padding: 12px 12px 12px 12px; 
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
   font-size: 1rem;
-  transition: border-color 0.3s ease, padding 0.2s ease; /* Added padding transition */
-  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
-  background: transparent; /* Transparent background for outlined effect */
+  transition: border-color 0.3s ease, padding 0.2s ease; 
+  font-family: 'Poppins', sans-serif; 
+  background: transparent; 
 }
 
 .register-page .input-field label {

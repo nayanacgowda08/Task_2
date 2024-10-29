@@ -64,7 +64,7 @@ const MerchantOrders = () => {
               <div className="order-info">
                 <h3>Order ID: {order.orderId}</h3>
                 <p>Status: <span className={order.status === "DELIVERED" ? "delivered-status" : "pending-status"}>{order.status}</span></p>
-                <p>Total Amount Paid: <span className="price">${order.totalPrice.toFixed(2)}</span></p>
+                <p>Total Amount Paid: <span className="price">₹{order.totalPrice.toFixed(2)}</span></p>
               </div>
               <div className="product-list">
                 {order.products.map((product) => (
@@ -72,7 +72,7 @@ const MerchantOrders = () => {
                     <img src={product.file} alt={product.productName} className="product-image" />
                     <div className="product-infoo">
                       <h4>{product.productName}</h4>
-                      <p>Price: <span className="price">${product.price}</span></p>
+                      <p>Price: <span className="price">₹{product.price}</span></p>
                       <p>Quantity: {product.quantity}</p>
                       <p>Category: {product.category}</p>
                       <p className="description">Description: {product.description}</p>

@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* background-color: white; */
+  
 }
 
 body {
@@ -10,7 +10,7 @@ body {
 }
 
 .nav-bar {
-  /* background: linear-gradient(to right, #f0f8ff, #e6f0ff);  */
+  
   padding: 0.8rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -34,7 +34,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #0056b3; /* Dark blue text */
+  color: #0056b3; 
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: bold;
@@ -44,12 +44,12 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #003366; /* Darker blue on hover */
-  transform: scale(1.05); /* Slight zoom effect */
+  color: #003366; 
+  transform: scale(1.05); 
 }
 
 nav ul li a.active {
-  color: #003366; /* Slightly darker blue to indicate active link */
+  color: #003366; 
 }
 
 .left {

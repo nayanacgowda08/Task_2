@@ -1,4 +1,4 @@
-/* Orders Page */
+
 .orders-page {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -14,10 +14,9 @@
   justify-content: center;
   height: auto;
   gap: 20px;
-  width: 60%; /* Adjust width to make card bigger */
+  width: 60%;
 }
 
-/* Order Card Style */
 .order-card {
   background-color: #fff;
   border: 1px solid #ddd;
@@ -29,33 +28,29 @@
   gap: 10px;
 }
 
-/* Order Details (Horizontal Layout for Image and Info) */
 .order-details {
   display: flex;
-  align-items: center; /* Align items at the center */
+  align-items: center;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
 
-/* Product Image */
 .product-image {
-  width: 120px; /* Adjust the image size */
+  width: 120px;
   height: 120px;
   object-fit: cover;
   border-radius: 8px;
   margin-right: 15px;
 }
 
-/* Product Info */
 .product-info {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  align-items: center; /* Vertically center the content */
+  align-items: center;
 }
 
-/* Left section with product name and category */
 .left-info {
   display: flex;
   flex-direction: column;
@@ -71,18 +66,16 @@
 .left-info h5 {
   margin: 4px 0;
   font-size: 14px;
-  color: #777; /* Lighter color for category */
+  color: #777;
 }
 
-/* Price in the middle */
 .middle-info {
   font-size: 16px;
   font-weight: 500;
   color: #333;
-  /* text-align: center; */
+
 }
 
-/* Status at the end */
 .right-info {
   font-size: 14px;
   font-weight: bold;

@@ -22,7 +22,9 @@
     "react-slick": "^0.30.2",
     "react-toastify": "^10.0.6",
     "remixicon": "^4.4.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.13",
+    "use-sound": "^4.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

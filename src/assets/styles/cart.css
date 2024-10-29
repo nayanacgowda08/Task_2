@@ -167,3 +167,8 @@
   cursor: not-allowed;
   opacity: 0.6; 
 }
+.empty-cart-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #ff6347; /* Change this color as needed */
+}

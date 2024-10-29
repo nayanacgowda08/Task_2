@@ -26,7 +26,7 @@ const Products_Display = ({ selectedCategory }) => {
 
   return (
     <div className="product">
-      {products.map((product) => {
+      {products&& products.map((product) => {
         const {
           productId,
           category,

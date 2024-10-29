@@ -133,7 +133,7 @@ const ProductDetails = () => {
       </div>
 
       <div className="related-products">
-        <h3>More Products</h3>
+        <h3>More Products Like This</h3>
         <div className="related-products-grid">
           {relatedProducts.map((relatedProduct) => (
             <div

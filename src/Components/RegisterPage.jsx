@@ -110,10 +110,7 @@ const RegisterLoginPage = () => {
 
   return (
     <div className="main-regis">
-      <div className="welcome-banner">
-        <h1>Welcome to Our Store</h1>
-        <p>Join us and explore amazing products</p>
-      </div>
+      {/* Removed the welcome banner */}
       <div className="register-page">
         <h2>{isRegister ? "Register" : "Login"}</h2>
         {error && <p className="error-message">{error}</p>}

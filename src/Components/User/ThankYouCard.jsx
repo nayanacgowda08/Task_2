@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import useSound from 'use-sound';
-
 
 function ThankYouCard() {
     const navigate = useNavigate();
@@ -36,79 +34,72 @@ function ThankYouCard() {
 
 const styles = {
     card: {
-        maxWidth: '450px',
-        backgroundColor: '#fff',
-        borderRadius: '12px',
-        boxShadow: '0 6px 20px rgba(0, 0, 0, 0.2)',
-        padding: '25px',
-        textAlign: 'center',
-        margin: '0 auto',
-        fontFamily: 'Arial, sans-serif'
+      maxWidth: "450px",
+      backgroundColor: "#f4f7fb", // Soft pastel blue-grey
+      borderRadius: "12px",
+      boxShadow: "0 6px 20px rgba(0, 0, 0, 0.15)",
+      padding: "25px",
+      textAlign: "center",
+      margin: "0 auto",
+      fontFamily: "Arial, sans-serif",
     },
     iconContainer: {
-        position: 'relative',
-        margin: '0 auto',
-        width: '70px',
-        height: '70px',
-        borderRadius: '50%',
-        backgroundColor: '#ff7043',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '20px'
+      position: "relative",
+      margin: "0 auto",
+      width: "70px",
+      height: "70px",
+      borderRadius: "50%",
+      backgroundColor: "#4CAF50", // Success green
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: "20px",
     },
     checkIcon: {
-        color: '#fff',
-        fontSize: '28px'
+      color: "#fff",
+      fontSize: "28px",
     },
     particles: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        borderRadius: '50%',
-        overflow: 'visible',
-    },
-    particle: {
-        position: 'absolute',
-        width: '8px',
-        height: '8px',
-        backgroundColor: '#ff7043',
-        borderRadius: '50%',
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      overflow: "visible",
     },
     title: {
-        fontSize: '22px',
-        fontWeight: 'bold',
-        color: '#333',
-        margin: '12px 0',
+      fontSize: "22px",
+      fontWeight: "bold",
+      color: "#333",
+      margin: "12px 0",
     },
     subtitle: {
-        fontSize: '15px',
-        color: '#666',
-        margin: '12px 0 22px',
+      fontSize: "15px",
+      color: "#666",
+      margin: "12px 0 22px",
     },
     buttonContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '12px',
+      display: "flex",
+      justifyContent: "center",
+      gap: "12px",
     },
     viewOrderButton: {
-        padding: '12px 24px',
-        borderRadius: '6px',
-        backgroundColor: '#fff',
-        color: '#333',
-        border: '1px solid #ddd',
-        cursor: 'pointer',
-        fontSize: '15px',
+      padding: "12px 24px",
+      borderRadius: "6px",
+      backgroundColor: "#1E88E5", // Cool blue for secondary action
+      color: "#fff",
+      border: "1px solid #1E88E5",
+      cursor: "pointer",
+      fontSize: "15px",
     },
     continueButton: {
-        padding: '12px 24px',
-        borderRadius: '6px',
-        backgroundColor: '#ff7043',
-        color: '#fff',
-        border: 'none',
-        cursor: 'pointer',
-        fontSize: '15px',
+      padding: "12px 24px",
+      borderRadius: "6px",
+      backgroundColor: "#FF7043", // Warm coral for primary action
+      color: "#fff",
+      border: "none",
+      cursor: "pointer",
+      fontSize: "15px",
     },
-};
-
+  };
+  
 export default ThankYouCard;

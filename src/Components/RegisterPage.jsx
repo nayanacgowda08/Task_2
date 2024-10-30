@@ -9,6 +9,7 @@ const RegisterLoginPage = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "", // Added confirmPassword here
     role: "customer",
   });
   const [error, setError] = useState("");
@@ -17,6 +18,7 @@ const RegisterLoginPage = () => {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "", // Added confirmPassword here
   });
 
   const navigate = useNavigate();
@@ -30,9 +32,9 @@ const RegisterLoginPage = () => {
   };
 
   const validateForm = () => {
-    const { email, password, name } = formData;
+    const { email, password, confirmPassword, name } = formData;
     let isValid = true;
-    let newErrors = { name: "", email: "", password: "" };
+    let newErrors = { name: "", email: "", password: "", confirmPassword: "" };
 
     if (isRegister && !name) {
       newErrors.name = "Name is required.";
@@ -50,6 +52,11 @@ const RegisterLoginPage = () => {
     if (!password || !/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z]).{8,}/.test(password)) {
       newErrors.password =
         "Password must be at least 8 characters long and include a number, a special character, an uppercase and a lowercase letter.";
+      isValid = false;
+    }
+
+    if (isRegister && password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
       isValid = false;
     }
 
@@ -95,6 +102,7 @@ const RegisterLoginPage = () => {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "", // Reset confirmPassword
       role: "customer",
     });
     setError("");
@@ -148,6 +156,20 @@ const RegisterLoginPage = () => {
             <label>Password</label>
             {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
+          {isRegister && (
+            <div className="input-field">
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder=" "
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <label>Confirm Password</label>
+              {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+            </div>
+          )}
           {isRegister && (
             <div className="radio-container">
               <label>Register as</label>

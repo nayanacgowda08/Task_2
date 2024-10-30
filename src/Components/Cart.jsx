@@ -21,9 +21,9 @@ const Cart = () => {
 
   const removeFromCart = async (productId) => {
     try {
-      setItems((prevItems) =>
-        prevItems.filter((item) => item.productId !== productId)
-      );
+      const updatedItems = items.filter((item) => item.productId !== productId);
+      setItems(updatedItems);
+      setIsCartEmpty(updatedItems.length === 0);
       await axios.delete(`${BASE_URL}/cart/${userId}/remove/${productId}`);
     } catch (error) {
       console.error("Error removing item from cart:", error);
@@ -144,7 +144,7 @@ const Cart = () => {
             transition={{ duration: 0.5 }}
             className="empty-cart-message"
           >
-            <h3>😢 Wow, such an empty cart!</h3>
+            <h3>😢 Oops!, such an empty cart!</h3>
             <p>Looks like you haven't added anything yet. 🛒</p>
             <p>Start shopping and fill it up! 🌟</p>
             <button 

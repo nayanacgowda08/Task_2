@@ -1,4 +1,3 @@
-// Product_Card.js
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -89,8 +88,8 @@ const Product_Card = ({
     }
   };
 
-  const originalPrice = price > 15000 ? price + 15000 : price; // Original price logic
-  const discount = originalPrice > 0 ? ((originalPrice - price) / originalPrice) * 100 : 0; // Calculate discount percentage
+  const originalPrice = price > 15000 ? price + 15000 : price;
+  const discount = originalPrice > 0 ? ((originalPrice - price) / originalPrice) * 100 : 0;
 
   return (
     <>
@@ -183,8 +182,9 @@ const Product_Card = ({
               <ModalDetails>
                 <h2>{title}</h2>
                 <p><strong>Category:</strong> {category}</p>
-                <p>{description}</p>
-                <p>{usp}</p>
+                <p><strong>Product Details:</strong> {usp}</p>
+                <p><strong>Description:</strong> {description}</p>
+                
                 <h3>Price: <span style={{ color: "#28a745" }}>₹{price}</span></h3>
                 {originalPrice > 15000 && (
                   <p style={{ textDecoration: "line-through", color: "gray", margin: "5px 0" }}>
@@ -197,12 +197,6 @@ const Product_Card = ({
                   </p>
                 )}
                 <p>Stock: {stock > 0 ? "In Stock" : "Out of Stock"}</p>
-                <div className="modal-buttons">
-                  <button className="add-to-cart-modal" onClick={handleAddToCart} disabled={stock === 0}>
-                    Add to Cart
-                  </button>
-                  <button className="close-modal" onClick={closeModal}>Close</button>
-                </div>
               </ModalDetails>
             </ModalContent>
           </ModalBackdrop>
@@ -241,7 +235,7 @@ const StyledImage = styled.img`
   width: 100%;
   height: auto;
   max-height: 300px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
   margin-bottom: 1rem;
 `;

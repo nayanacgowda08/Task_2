@@ -33,7 +33,7 @@ const Navbar = ({ setView }) => {
               whileHover={{ scale: 1.3, color: "#003366" }}
               transition={{ type: "spring", stiffness: 300 }}
             ></motion.i> 
-            <span>E-Shop</span>
+            <span style={{ fontSize: '1rem' }}>E-Shop</span>
           </NavLink>
         </li>
       </ul>

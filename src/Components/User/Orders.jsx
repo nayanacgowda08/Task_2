@@ -63,7 +63,7 @@ const Orders = () => {
         <h1 style={{ fontSize: '28px', textAlign: 'center', marginBottom: '20px' }}>My Orders</h1>
 
         {orders.length > 0 ? (
-          orders.map((order) => (
+           orders.slice().reverse().map((order) => (
             <div
               key={order.orderId}
               style={{

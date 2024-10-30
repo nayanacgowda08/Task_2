@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 
 body {
@@ -10,16 +9,15 @@ body {
 }
 
 .nav-bar {
-  
-  padding: 0.8rem 2rem;
+  padding: 1rem 2rem; /* Increased padding for a larger navbar */
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px;
   z-index: 1;
   transition: box-shadow 0.3s;
+  height: 80px; /* Increased height for a larger navbar */
 }
-
 
 nav ul {
   list-style-type: none;
@@ -30,17 +28,17 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 15px;
+  margin: 0 25px; /* Increased margin for spacing between items */
 }
 
 nav ul li a {
   color: #0056b3; 
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1.1rem; /* Increased font size for links */
   font-weight: bold;
   transition: color 0.3s, transform 0.3s;
   border-radius: 5px;
-  padding: 10px 15px;
+  padding: 14px 24px; /* Increased padding for buttons */
 }
 
 nav ul li a:hover {
@@ -58,17 +56,19 @@ nav ul li a.active {
 
 .right {
   display: flex;
-  gap: 20px;
+  gap: 30px; /* Increased gap for spacing between items */
 }
 
 nav ul li a i {
-  margin-right: 5px;
+  margin-right: 10px; /* Increased margin for icons */
+  font-size: 1.5rem; /* Increased icon size */
 }
 
 @media (max-width: 768px) {
   .nav-bar {
     flex-direction: column;
     padding: 1rem;
+    height: auto; /* Remove fixed height for mobile */
   }
 
   nav ul {
@@ -78,7 +78,7 @@ nav ul li a i {
   }
 
   nav ul li {
-    margin: 10px 0;
+    margin: 12px 0; /* Increased margin for mobile */
     width: 100%;
     text-align: center;
   }

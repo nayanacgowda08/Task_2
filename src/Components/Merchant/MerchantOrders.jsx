@@ -160,7 +160,7 @@ const MerchantOrders = () => {
       <div style={ordersStyle}>
         <h2 style={headingStyle}>Orders</h2>
         <div style={orderListStyle}>
-          {orders.map((order) => (
+          {orders.slice().reverse().map((order) => (
             <div key={order.orderId} style={orderCardStyle}>
               <div style={orderDetailsStyle}>
                 <div style={orderInfoStyle}>

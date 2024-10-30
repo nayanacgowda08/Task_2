@@ -35,7 +35,7 @@ function ThankYouCard() {
 const styles = {
     card: {
       maxWidth: "450px",
-      backgroundColor: "#f4f7fb", // Soft pastel blue-grey
+      backgroundColor: "#f4f7fb", 
       borderRadius: "12px",
       boxShadow: "0 6px 20px rgba(0, 0, 0, 0.15)",
       padding: "25px",
@@ -49,7 +49,7 @@ const styles = {
       width: "70px",
       height: "70px",
       borderRadius: "50%",
-      backgroundColor: "#4CAF50", // Success green
+      backgroundColor: "#4CAF50", 
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -85,7 +85,7 @@ const styles = {
     viewOrderButton: {
       padding: "12px 24px",
       borderRadius: "6px",
-      backgroundColor: "#1E88E5", // Cool blue for secondary action
+      backgroundColor: "#1E88E5",
       color: "#fff",
       border: "1px solid #1E88E5",
       cursor: "pointer",
@@ -94,7 +94,7 @@ const styles = {
     continueButton: {
       padding: "12px 24px",
       borderRadius: "6px",
-      backgroundColor: "#FF7043", // Warm coral for primary action
+      backgroundColor: "#FF7043", 
       color: "#fff",
       border: "none",
       cursor: "pointer",

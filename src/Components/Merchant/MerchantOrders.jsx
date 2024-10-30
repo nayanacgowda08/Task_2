@@ -62,8 +62,8 @@ const MerchantOrders = () => {
   const ordersStyle = {
     flex: 2,
     marginRight: '20px',
-    maxHeight: 'calc(100vh - 60px)', // Ensures orders section doesn't exceed the viewport height
-    overflowY: 'auto', // Scroll if content overflows
+    maxHeight: 'calc(100vh - 60px)', 
+    overflowY: 'auto', 
   };
 
   const summaryStyle = {
@@ -72,10 +72,10 @@ const MerchantOrders = () => {
     borderRadius: '8px',
     padding: '15px',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    height: 'fit-content', // Adjusts to the content size
+    height: 'fit-content', 
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between', // Space between heading and content
+    justifyContent: 'space-between', 
   };
 
   const headingStyle = {
@@ -152,7 +152,7 @@ const MerchantOrders = () => {
     backgroundColor: '#f1f1f1',
     borderRadius: '8px',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    marginBottom: '10px', // Margin to avoid bottom white space
+    marginBottom: '10px', 
   };
 
   return (

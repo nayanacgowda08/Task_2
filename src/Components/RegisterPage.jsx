@@ -9,7 +9,7 @@ const RegisterLoginPage = () => {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "", // Added confirmPassword here
+    confirmPassword: "", 
     role: "customer",
   });
   const [error, setError] = useState("");
@@ -18,7 +18,7 @@ const RegisterLoginPage = () => {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "", // Added confirmPassword here
+    confirmPassword: "", 
   });
 
   const navigate = useNavigate();
@@ -102,7 +102,7 @@ const RegisterLoginPage = () => {
       name: "",
       email: "",
       password: "",
-      confirmPassword: "", // Reset confirmPassword
+      confirmPassword: "", 
       role: "customer",
     });
     setError("");

@@ -9,7 +9,7 @@ const EditProductForm = ({ setView, product }) => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(product.image);
   const [description, setDescription] = useState(product.description);
-  const [category, setCategory] = useState(product.category); // Assuming product.category has an id property
+  const [category, setCategory] = useState(product.category); 
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {

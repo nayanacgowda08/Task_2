@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../assets/styles/category.css";
 import { BASE_URL } from "../../Services/helper";
 
-// Mapping of category names to their respective images
+
 const categoryImages = {
   "All Categories":"https://rukminim2.flixcart.com/fk-p-flap/128/128/image/6a99be02898b225d.jpg?q=100",
   "Mobiles & Tablets": "https://cdn.pixabay.com/photo/2016/11/29/12/30/phone-1869510_1280.jpg",
@@ -18,7 +18,7 @@ const categoryImages = {
 
 const Categories = ({ onSelectCategory }) => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null); // Track selected category
+  const [selectedCategory, setSelectedCategory] = useState(null); 
 
   useEffect(() => {
     const fetchCategories = async () => {

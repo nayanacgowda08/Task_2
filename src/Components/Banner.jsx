@@ -93,7 +93,7 @@ const Banner = () => {
         backgroundSize: 'contain',
         backgroundPosition: 'center',
         // backgroundRepeat:"no-repeat",
-        padding: '20px 0px' // Adjust padding to control spacing around the container
+        padding: '20px 0px' 
       }}
     >
       <div className="banner-search-container">

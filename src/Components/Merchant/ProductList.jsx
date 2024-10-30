@@ -78,7 +78,7 @@ const ProductList = ({ setView, setEditProductId }) => {
                 style={{
                   width: '100%',
                   height: '150px',
-                  objectFit: 'contain', // Ensures the image covers the area while maintaining aspect ratio
+                  objectFit: 'contain', 
                   borderRadius: '5px'
                 }}
               />

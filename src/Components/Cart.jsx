@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import ThankYouCard from "../Components/User/ThankYouCard"; // Import ThankYouCard component
+import ThankYouCard from "../Components/User/ThankYouCard"; 
 import "../assets/styles/cart.css";
 import { BASE_URL } from "../Services/helper";
 import useSound from 'use-sound';
 import thankYouSound from '../assets/success-48018.mp3';
-import Product_Card from "../Components/Product_Card"; // Import Product_Card component
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import Product_Card from "../Components/Product_Card"; 
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [items, setItems] = useState([]);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [isCartEmpty, setIsCartEmpty] = useState(true); // Track if the cart is empty
+  const [isCartEmpty, setIsCartEmpty] = useState(true); 
   const [stockWarning, setStockWarning] = useState({});
-  const [products, setProducts] = useState([]); // Track available products
+  const [products, setProducts] = useState([]); 
   const userId = localStorage.getItem("userId");
   const [play] = useSound(thankYouSound);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const removeFromCart = async (productId) => {
     try {
@@ -78,7 +78,7 @@ const Cart = () => {
     try {
       const response = await axios.get(`${BASE_URL}/cart/${userId}`);
       setItems(response.data.items);
-      setIsCartEmpty(response.data.items.length === 0); // Update isCartEmpty based on items
+      setIsCartEmpty(response.data.items.length === 0); 
     } catch (error) {
       console.error("Error fetching items:", error);
     }
@@ -86,8 +86,8 @@ const Cart = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/user/all`); // Adjust the endpoint as necessary
-      setProducts(response.data); // Assuming response.data is the array of products
+      const response = await axios.get(`${BASE_URL}/user/all`); 
+      setProducts(response.data); 
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -116,7 +116,7 @@ const Cart = () => {
 
   useEffect(() => {
     fetchItems();
-    fetchProducts(); // Fetch products when the component mounts
+    fetchProducts(); 
   }, [userId]);
 
   const totalItems =
@@ -125,7 +125,6 @@ const Cart = () => {
     items &&
     items.reduce((total, item) => total + item.productPrice * item.quantity, 0);
 
-  // Function to select random products
   const getRandomProducts = (num) => {
     if (products.length === 0) return [];
     const shuffled = products.sort(() => 0.5 - Math.random());
@@ -150,21 +149,21 @@ const Cart = () => {
             <button 
   onClick={() => navigate("/user")} 
   style={{
-    backgroundColor: "#279dc1", // Green background
-    color: "white",             // White text
-    border: "none",             // No border
-    padding: "10px 20px",      // Padding for size
-    textAlign: "center",        // Center text
-    textDecoration: "none",     // No underline
-    display: "inline-block",    // Inline-block for spacing
-    fontSize: "16px",           // Font size
-    margin: "10px 0",          // Margin for spacing
-    cursor: "pointer",          // Pointer cursor on hover
-    borderRadius: "5px",       // Rounded corners
-    transition: "background-color 0.3s", // Smooth transition for hover
+    backgroundColor: "#279dc1", 
+    color: "white",            
+    border: "none",             
+    padding: "10px 20px",      
+    textAlign: "center",       
+    textDecoration: "none",     
+    display: "inline-block",    
+    fontSize: "16px",           
+    margin: "10px 0",         
+    cursor: "pointer",         
+    borderRadius: "5px",       
+    transition: "background-color 0.3s", 
   }}
-  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#4bb8d9"} // Darker green on hover
-  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#279dc1"} // Original green on leave
+  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#4bb8d9"} 
+  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#279dc1"} 
 >
   Browse Products...
 </button>
@@ -180,7 +179,7 @@ const Cart = () => {
               {items.map((item) => {
                 const originalPrice = item.productPrice > 15000 ? item.productPrice + 15000 : item.productPrice;
                 const discountedPrice = item.productPrice;
-                const discount = originalPrice > 0 ? ((originalPrice - discountedPrice) / originalPrice) * 100 : 0; // Calculate discount percentage
+                const discount = originalPrice > 0 ? ((originalPrice - discountedPrice) / originalPrice) * 100 : 0; 
 
                 return (
                   <motion.div
@@ -188,7 +187,7 @@ const Cart = () => {
                     key={item.productId}
                     initial={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -100 }}
-                    transition={{ duration: 0.3 }} // Adjusted duration for smoother animation
+                    transition={{ duration: 0.3 }} 
                   >
                     <img
                       src={item.productFile}

@@ -82,3 +82,9 @@
   color: green;
   text-align: right;
 }
+
+.customer-info {
+  position: sticky;
+  top: 20px; /* Adjust as needed */
+  height: fit-content; /* Keeps the box as small as needed */
+}

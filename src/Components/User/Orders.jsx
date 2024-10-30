@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../Services/helper';
+import "../../assets/styles/orders.css"
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -27,8 +28,8 @@ const Orders = () => {
         setUserInfo({
           name: response.data.name,
           email: response.data.email,
-          accountCreated: response.data.accountCreated, // Assuming this field exists
-          lastOrder: response.data.lastOrder, // Assuming this field exists
+          accountCreated: response.data.accountCreated, 
+          lastOrder: response.data.lastOrder, 
         });
       } catch (error) {
         console.error('Error fetching user info:', error);
@@ -165,7 +166,8 @@ const Orders = () => {
 
       {/* Right Side: Customer Information */}
       <div
-        style={{
+       className="customer-info"
+         style={{
           flex: 1,
           border: '1px solid #E0E0E0',
           borderRadius: '8px',

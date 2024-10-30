@@ -1,15 +1,13 @@
-
 .categories-container {
   display: flex;
   justify-content: center; 
   flex-wrap: wrap;
-  gap: 70px; 
+  gap: 50px; /* Decreased gap for tighter layout */
   padding: 20px 10px;
   background-color: rgb(244, 248, 250); 
   border-radius: 10px;
   margin: 0px 20px;
 }
-
 
 .category-card {
   cursor: pointer;
@@ -17,8 +15,8 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  width: 100px; 
-  padding: 15px; 
+  width: 120px; /* Decreased width */
+  padding: 10px; /* Decreased padding */
   border-radius: 8px; 
   background-color: #ffffff; 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
@@ -30,13 +28,11 @@
 }
 
 .category-name {
-  font-size: 16px; 
+  font-size: 14px; /* Slightly smaller font size */
   font-weight: bold;
   color: #333; 
-  margin-top: 10px; 
-
+  margin-top: 5px; /* Reduced margin for tighter spacing */
 }
-
 
 .category-card.selected {
   background-color: #e0f7fa; 
@@ -44,15 +40,21 @@
   color: #007acc; 
 }
 
-
-
 @media (max-width: 768px) {
   .category-card {
-    width: 90px; 
-    padding: 10px; 
+    width: 100px; /* Adjusted width for smaller screens */
+    padding: 8px; /* Decreased padding */
   }
   
   .category-name {
-    font-size: 14px; 
+    font-size: 12px; /* Smaller font size for mobile */
   }
+}
+
+.category-image {
+  width: 100%; /* Make image responsive */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100px; /* Decreased max height */
+  object-fit: cover; /* Ensure the image covers the area */
+  border-radius: 8px; /* Optional: add rounded corners */
 }

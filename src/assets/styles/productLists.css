@@ -1,21 +1,44 @@
- 
+.container {
+    position: relative;
+    width: 100%;
+}
 
-.product {
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));  
-    gap: 30px;  
-    margin: 50px 30px;
-    justify-content: center;  
+.banner {
+    height: 25vh; /* Takes up 70% of the viewport height */
+    background: url('../images/happy.jpg'); /* Replace with actual path */
+    background-size: cover;
+    display: flex;
+    overflow: hidden;
+    object-fit: contain;
+    /* justify-content: center; */
+    /* align-items: center; */
+    color: white;
+    font-size: 2.5em;
+    /* font-weight: bold; */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.products-section {
+    background: 
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1)), 
+        url('../images/happy.jpg'); /* Fading effect with the same banner image */
+    background-size: cover;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 30px;
+    margin: 0 auto;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {
-    .product-list {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  
+    .products-section {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }
 
 @media (max-width: 500px) {
-    .product-list {
-        grid-template-columns: 1fr;  
+    .products-section {
+        grid-template-columns: 1fr;
     }
 }

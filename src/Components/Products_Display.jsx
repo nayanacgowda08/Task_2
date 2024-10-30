@@ -25,36 +25,44 @@ const Products_Display = ({ selectedCategory }) => {
   }, [selectedCategory]);
 
   return (
-    <div className="product">
-      {products&& products.map((product) => {
-        const {
-          productId,
-          category,
-          description,
-          file,
-          price,
-          name,
-          stock,
-          rating,
-          merchantId,
-          usp,
-        } = product;
-        return (
-          <Product_Card
-            key={productId}
-            id={productId}
-            category={category}
-            description={description}
-            image={file}
-            price={price}
-            title={name}
-            stock={stock}
-            rating={rating}
-            merchantId={merchantId}
-            usp={usp}
-          />
-        );
-      })}
+    <div className="container">
+      {/* Banner Section */}
+      <div className="banner">
+        {/* HAPPY DIWALI */}
+      </div>
+
+      {/* Products Section */}
+      <div className="products-section">
+        {products && products.map((product) => {
+          const {
+            productId,
+            category,
+            description,
+            file,
+            price,
+            name,
+            stock,
+            rating,
+            merchantId,
+            usp,
+          } = product;
+          return (
+            <Product_Card
+              key={productId}
+              id={productId}
+              category={category}
+              description={description}
+              image={file}
+              price={price}
+              title={name}
+              stock={stock}
+              rating={rating}
+              merchantId={merchantId}
+              usp={usp}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

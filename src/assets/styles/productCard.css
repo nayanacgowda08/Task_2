@@ -166,25 +166,40 @@
     transform: none;
 }
 
-.add-to-cartt.no-hover:hover {
-    background-color: #cccccc;
-    transform: none;
-}
-
+/* Light blue tones for a professional yet fresh look */
 .add-to-cartt {
-    background-color: #4bbbee;
-    color: #fff;
+    background-color: 
+    #2596be; /* Sky blue */
+    color: #ffffff;
 }
 
 .view-detailss {
-    background-color: #2193df;
-    color: #fff;
+    background-color: #1e81b0; /* Cerulean blue */
+    color: #ffffff;
 }
 
 .go-to-cart {
-    background-color: #fbc02d;
-    color: #fff;
+    background-color: #F7DC6F; /* Soft yellow for contrast */
+    color: #ffffff;
 }
+
+/* Hover effects with slight darkening for emphasis */
+.add-to-cartt:hover {
+    background-color: #48A1D9; /* Darker sky blue */
+    transform: scale(1.03);
+}
+
+.view-detailss:hover {
+    background-color: #2980B9; /* Darker cerulean */
+    transform: scale(1.03);
+}
+
+.go-to-cart:hover {
+    background-color: #F4C842; /* Darker soft yellow */
+    transform: scale(1.03);
+}
+
+
 
 @media (max-width: 768px) {
     .product-card {

@@ -133,7 +133,7 @@ const Product_Card = ({
           )}
           {stock > 0 ? (
             stock < 10 ? (
-              <span className="hurry-up" style={{ color: "orange" }}>
+              <span className="hurry-up" style={{ color: "rgba(230,130,70,255)" }}>
                 Hurry Up! Only {stock} left
               </span>
             ) : (

@@ -4,19 +4,21 @@
   box-sizing: border-box;
 }
 
+
+
 body {
   background-color: white;
 }
 
 .nav-bar {
-  padding: 1rem 2rem; /* Increased padding for a larger navbar */
+  padding: 1rem 2rem; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px;
   z-index: 1;
   transition: box-shadow 0.3s;
-  height: 80px; /* Increased height for a larger navbar */
+  height: 80px; 
 }
 
 nav ul {
@@ -28,17 +30,17 @@ nav ul {
 }
 
 nav ul li {
-  margin: 0 25px; /* Increased margin for spacing between items */
+  margin: 0 25px;
 }
 
 nav ul li a {
   color: #0056b3; 
   text-decoration: none;
-  font-size: 1.1rem; /* Increased font size for links */
+  font-size: 1.1rem; 
   font-weight: bold;
   transition: color 0.3s, transform 0.3s;
   border-radius: 5px;
-  padding: 14px 24px; /* Increased padding for buttons */
+  padding: 14px 24px; 
 }
 
 nav ul li a:hover {
